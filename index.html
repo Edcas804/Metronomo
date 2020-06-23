@@ -1,0 +1,106 @@
+<DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width, initial-scale=1">
+	<meta name="author" content="Edwar Castaño">
+	<link rel="stylesheet" href="estilos.css">
+	<title>Metronomo</title>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<body>
+    <div class="contenedorMetronomo">
+	    
+		<!--Muestra el tempo global-->
+	    <div class="contenedorTempo"><input type="text"  id="valorTempo" value="100" onfocus="StopMetronomo(); mostrarplay()" oninput="mostrarRango()" class="tabs4"><p class="bpm">BPM</p></div>
+		
+		<!--Muestra la dinamica actual según el tempo-->
+		<p class="parrafos" id="dinamica">Andante</p>
+		
+		<!--Botones de rango y barra-->
+		<div class="contenedorRango"><button type="button" value="5" class="tabs2" onclick="back(); mostrarTempoRango(); mostrarTempoRango()" id="back5">- 5</button>
+		<input type="range" min="20" max="220" id="rangoTempo" value="100" 
+		oninput="mostrarTempoRango(); StopMetronomo(); mostrarplay()"  class="slider">
+		     <button type="button" value="5" class="tabs2" onclick="go(); mostrarTempoRango(); mostrarTempoRango()" id="go5">+ 5</button>
+		</div>
+		
+		<!--Play Stop-->
+		<div class="botonTabs"><button type="button" value="play" onclick="playAll(); ocultarplay()" id="play" class="tabs3"><i style='font-size:24px' class='fas'>&#xf04b;</i></button></div>
+		<div class="botonTabs"><button type="button" value="Stop" onclick="StopMetronomo(); mostrarplay()" id="stop" style="display:none" class="tabs3"><i style='font-size:24px' class='fas'>&#xf04d;</i></button></div>
+		
+		<!--Circulos interactivos-->
+		<div class="contenedorCircle">
+		    <div class="circle" id="circle1"></div>
+		    <div class="circle" id="circle2"></div>
+		    <div class="circle" id="circle3"></div>
+		    <div class="circle" id="circle4"></div>
+		    <div class="circle" id="circle5" style="display: none"></div>
+		    <div class="circle" id="circle6" style="display: none"></div>
+		    <div class="circle" id="circle7" style="display: none"></div>
+		</div>
+		
+		<!--Muestra la subdivision actual-->
+		<p class="parrafos" id="subdivision"></p>
+		<!--Seccion de subdivisiones--->
+		<div class="contenedorNotas">
+		    <div class="botonTabs"><button type="button" value="1" onclick="playNegras(); ocultarplay(); functionActive(event); subdivision.innerHTML = 'Negras'" class="tabs" id="playporDefecto">♩</button></div>
+		    <div class="botonTabs"><button type="button" value="1/2"  onclick="playCorcheas();  ocultarplay(); functionActive(event)"class="tabs">♫</button></div>
+		    <div class="botonTabs"><button type="button" value="3"  onclick="playTresillos(); ocultarplay(); functionActive(event)" class="tabs">♪♪♪</button></div>
+		    <div class="botonTabs"> <button type="button" value="4" onclick="playsemiCorcheas(); ocultarplay(); functionActive(event)" class="tabs">♬</button></div>
+		    <div style="display:none" class="botonTabs" > <button type="button" value="tresilloNegra" onclick="playtresilloNegra(); ocultarplay(); functionActive(event)" class="tabs">♩♩♩</button></div>
+	        <div class="botonTabs"><button type="button" value="Galopa" onclick="playGalopa(); ocultarplay(); functionActive(event)" class="tabs">♪♬</button></div>
+		    <div class="botonTabs"> <button type="button" value="contraGalopa" onclick="playcontraGalopa(); ocultarplay(); functionActive(event)" class="tabs">♬♪</button></div>
+		    <div class="botonTabs"> <button type="button" value="Sincopa" onclick="playSincopa(); ocultarplay(); functionActive(event)" class="tabs">♬♪ </button></div>
+		    <div class="botonTabs"> <button type="button" value="saltillo" onclick="playSaltillo(); ocultarplay(); functionActive(event)" class="tabs">♪.♪<i class="ico ico-triolets"></i></button></div>
+		</div>
+		<!--Seleccionar compases posiciones absolutas-->
+		 <div class="contenedorElegirCompas" id="listaCompases">
+		    <p class="cerrarCompas" onclick="cerrarMenuCompas()">X</p>
+			<ul>
+				<li onclick="compasDosCua()">2 / 4</li>
+				<li onclick="compasTresCua()">3 / 4</li>
+			    <li onclick="compasCuatroCua()">4 / 4</li>
+			    <li onclick="compasCincoCua()">5 / 4</li>
+			    <li onclick="compasSeisCua()">6 / 4</li>
+			    <li onclick="compasSieteCua()">7 / 4</li>
+			    <li onclick="compasSeisOctavos()">6 / 8</li>
+			</ul>
+		</div>
+	    <div class="botonTabs botonTabsPosition" onclick="abrirMenuCompas()">
+		 <button class="tabs2"><p id="innerCompas" class="bpm">4 / 4</p></button>
+		</div>
+		<div class="contenedorLogo">
+		    <img src="Img/clave2.png">
+		</div>
+		
+	
+		
+		
+		
+	</div>	
+	
+	<div style="display: none">
+		<a>https://github.com/paulrosen/abcjs</a><br>
+		<a>https://github.com/0xfe/vexflow</a>
+	</div>	
+
+
+
+
+
+
+<script>
+function functionActive(evt){
+   
+var tabs = document.getElementsByClassName('tabs');
+	    for(i = 0; i < tabs.length; i++){
+			tabs[i].className = tabs[i].className.replace(" active", "");
+        
+		}
+	evt.currentTarget.className += " active";//" activeMain" debe tener un espacio adelante
+}
+</script>
+
+	<script src="index.js"></script>
+</body>
+</html>
