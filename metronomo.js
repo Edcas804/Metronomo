@@ -1,67 +1,108 @@
+//abrir cerrar selector de compases
 function cerrarMenuCompas(){
 	document.getElementById('listaCompases').style.width = '0%';
 	document.getElementById('listaCompases').style.visibility = 'hidden';
 }
 function abrirMenuCompas(){
-	document.getElementById('listaCompases').style.width = '30%';
+	document.getElementById('listaCompases').style.width = '50%';
 	document.getElementById('listaCompases').style.visibility = 'visible';
 }
+//abrir cerrar configuracion
+function cerrarAjustes(){
+	document.getElementById('configuracion').style.width = '0%';
+	document.getElementById('configuracion').style.visibility = 'hidden';
+}
+function abrirAjustes(){
+	document.getElementById('configuracion').style.width = '50%';
+	document.getElementById('configuracion').style.visibility = 'visible';
+}
+// mostrar play stop
 function mostrarplay(){
 	document.getElementById('play').style.display = 'block';
+	document.getElementById('contentplay').style.display = 'block';
+	document.getElementById('contenstop').style.display = 'none';
 	document.getElementById('stop').style.display = 'none';	
 }
 function ocultarplay(){
 	document.getElementById('play').style.display = 'none';
+	document.getElementById('contentplay').style.display = 'none';
+	document.getElementById('contenstop').style.display = 'block';
 	document.getElementById('stop').style.display = 'block';
 }
+//*************************************************
 
 var tempoRango = document.getElementById('rangoTempo').value;
 var tempoIn = document.getElementById('valorTempo').value;
 var back5 = document.getElementById('back5').value;
 var go5 = document.getElementById('go5').value;
-var tempoBack = tempoIn;
-var tempoGo = tempoIn;
+var tempoBack;
 
-
-function back(){
-	
-		tempoBack = parseInt(tempoGo) - parseInt(back5);
-		document.getElementById('valorTempo').value = tempoBack;
-		document.getElementById('rangoTempo').value = tempoBack;
-	    back5 = parseInt(back5) + 5;
-		console.log('tempoBack' +tempoBack);
-		tempoBack = tempoIn;
-        tempoGo = tempoIn;
-        
+//datos para tempo personalizado
+var usuarioTempo;
+function tempoUsuario(){
+    usuarioTempo = document.getElementById('usuarioTempo').value;
+	document.getElementById('back5').innerHTML = '-' + usuarioTempo;
+    document.getElementById('go5').innerHTML =  '+' + usuarioTempo;
+	back5 = '-' + usuarioTempo;
+	go5 = usuarioTempo;
 }
-function go(){
-		tempoGo = parseInt(tempoBack) + parseInt(go5);
-		document.getElementById('valorTempo').value = tempoGo;
-		document.getElementById('rangoTempo').value = tempoGo;
-	    go5 = parseInt(go5) + 5;
-		console.log('tempoGo ' + tempoGo);
-		tempoBack = tempoIn;
-        tempoGo = tempoIn;
-}
+//Fin datos para tempo personalizado
 function mostrarRango(){
 	tempoIn = document.getElementById('valorTempo').value;
 	document.getElementById('rangoTempo').value = tempoIn;
-		tempoBack = tempoIn;
-        tempoGo = tempoIn;
-
-
 }
 
 function mostrarTempoRango(){
     tempoRango = document.getElementById('rangoTempo').value;
     document.getElementById('valorTempo').value = tempoRango ;
-		tempoBack = tempoIn;
-        tempoGo = tempoIn;
 	
+}
+function back(){
+	    if(tempoRango < 21){
+		tempoRango = 220;
+	    }
+		tempoBack = parseInt(tempoRango) + parseInt(back5);
+		tempoRango = tempoBack;
+		document.getElementById('valorTempo').value = tempoBack ;
+		document.getElementById('rangoTempo').value = tempoBack;
+}
+function go(){
+	    if(tempoRango > 220){
+		tempoRango = 20;
+	    }
+		tempoGo = parseInt(tempoRango) + parseInt(go5);
+		document.getElementById('valorTempo').value = tempoGo;
+		document.getElementById('rangoTempo').value = tempoGo;
+		tempoRango = tempoGo;
+		console.log(tempoGo);
+}
+ var beatuseraumentar = document.getElementById('aumentar').value;
+ var beatuserDisminuir = document.getElementById('disminuir').value;
+ var aumbeat;
+ var disbeat;
+ usuarioTempo = 5; // se inicia nuevamente en 5 porque antes de esto esta NaN
+function disminuirbeat(){
+	    if(usuarioTempo < 2){
+			usuarioTempo = 11;
+		}
+	    disbeat = parseInt(usuarioTempo) - parseInt(beatuserDisminuir);
+	    usuarioTempo = disbeat;
+		document.getElementById('usuarioTempo').value = disbeat;
+		console.log(disbeat);
+		
+}
+function aumentarbeat(){
+	 if(usuarioTempo > 9){
+			usuarioTempo = 0;
+		}
+	   aumbeat = parseInt(usuarioTempo) + parseInt(beatuseraumentar);
+	   usuarioTempo = aumbeat;
+	   document.getElementById('usuarioTempo').value = aumbeat;
+	  
+
 }
 
 //************Funciones para determinar el compas y los circulos interactivos
-
 	var compas = 4; // es global para que cambie según la funcion 
 function compasDosCua(){
 	compas = 2;
@@ -198,6 +239,7 @@ var Saltillobo = false;
 	tempoIn = document.getElementById('valorTempo').value;
 	
 	//Intervalos de tempo
+	
 	var tempoNegra = 60000/tempoIn;
 	var tempoCorchea= tempoNegra / 2;
 	var tempoSemiCorchea= tempoNegra / 4;
@@ -209,7 +251,7 @@ var Saltillobo = false;
 	//****************
 	
 	//Tiempo Delay
-	var tempoInicio = tempoNegra + parseInt(tempoCorchea);
+	var tempoInicio = parseInt(tempoNegra) + parseInt(tempoCorchea);
 	
 	//Números de las subdivisiones
 	var negra = 4;
@@ -239,11 +281,11 @@ function playNegras(){
 		if(negra >= compas){
 			negra = 1;
 			for( i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#202020';
+		       circles[i].style.background = '#000';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[0].style.background = '#ff0000';
-			circles[0].style.transform = 'scale(1.2)';
+			circles[0].style.background = '#b50000';
+			circles[0].style.transform = 'scale(1.5)';
 			beatNegraAcento.play();
 			
 			//document.getElementById('circle1').style.background = '#ff0000';
@@ -251,60 +293,60 @@ function playNegras(){
 		else if(negra == 1){
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#202020';
+		       circles[i].style.background = '#000';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[1].style.background = '#ff0000';
+			circles[1].style.background = '#900000';
 			circles[1].style.transform = 'scale(1.2)';
 			beatNegra.play();
 		}
 		else if(negra == 2){
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#202020';
+		       circles[i].style.background = '#000';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[2].style.background = '#ff0000';
+			circles[2].style.background = '#900000';
 			circles[2].style.transform = 'scale(1.2)';
 			beatNegra.play();
 		}
 		else if(negra == 4){
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#202020';
+		       circles[i].style.background = '#000';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[4].style.background = '#ff0000';
+			circles[4].style.background = '#900000';
 			circles[4].style.transform = 'scale(1.2)';
 			beatNegra.play();
 		}
 		else if(negra == 5){
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#202020';
+		       circles[i].style.background = '#000';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[5].style.background = '#ff0000';
+			circles[5].style.background = '#900000';
 			circles[5].style.transform = 'scale(1.2)';
 			beatNegra.play();
 		}
 		else if(negra == 6){
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#202020';
+		       circles[i].style.background = '#000';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[6].style.background = '#ff0000';
+			circles[6].style.background = '#900000';
 			circles[6].style.transform = 'scale(1.2)';
 			beatNegra.play();
 		}
 		else{
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#202020';
+		       circles[i].style.background = '#000';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[3].style.background = '#ff0000';
+			circles[3].style.background = '#900000';
 			circles[3].style.transform = 'scale(1.2)';
 			beatNegra.play();
 			
@@ -668,6 +710,15 @@ function StopMetronomo(){
 	
 }
 function playAll(){
+	if(tempoIn > 220){
+		var newtempoRango = 20;
+		tempoIn = newtempoRango;
+        document.getElementById('valorTempo').value = newtempoRango;
+		document.getElementById('rangoTempo').value = newtempoRango;// inciamos el slider para que no se sobrepasen los 220 pbm
+		
+			console.log('es mayor');
+			console.log(tempoIn);
+	    }
 	
 	if(corcheabo == true){
 		playCorcheas();
@@ -742,5 +793,8 @@ function playAll(){
 	else{
 		document.getElementById('dinamica').innerHTML = 'Prestissimo  ';
 	}
+	
+	
+	    
 	
 }

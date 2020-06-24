@@ -7,26 +7,39 @@
 	<link rel="stylesheet" href="estilos.css">
 	<title>Metronomo</title>
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
     <div class="contenedorMetronomo">
 	    
 		<!--Muestra el tempo global-->
-	    <div class="contenedorTempo"><input type="text"  id="valorTempo" value="100" onfocus="StopMetronomo(); mostrarplay()" oninput="mostrarRango()" class="tabs4"><p class="bpm">BPM</p></div>
-		
+	    <div class="contenedorTempo">
+		    <input type="text"  id="valorTempo" value="80" onfocus="StopMetronomo(); mostrarplay()" oninput="mostrarRango()" class="tabs4">
+			<p class="bpm">BPM</p>
+		</div>
+			
 		<!--Muestra la dinamica actual según el tempo-->
 		<p class="parrafos" id="dinamica">Andante</p>
 		
 		<!--Botones de rango y barra-->
-		<div class="contenedorRango"><button type="button" value="5" class="tabs2" onclick="back(); mostrarTempoRango(); mostrarTempoRango()" id="back5">- 5</button>
-		<input type="range" min="20" max="220" id="rangoTempo" value="100" 
-		oninput="mostrarTempoRango(); StopMetronomo(); mostrarplay()"  class="slider">
-		     <button type="button" value="5" class="tabs2" onclick="go(); mostrarTempoRango(); mostrarTempoRango()" id="go5">+ 5</button>
+		<div class="contenedorRango">
+		    <button type="button"  class="atras" onclick="back(); StopMetronomo();  playAll(); ocultarplay()" id="back5" value="-5">- 5</button>
+		    <input type="range" min="20" max="220" id="rangoTempo" value="80" 
+		    oninput="mostrarTempoRango(); StopMetronomo(); playAll(); ; ocultarplay()"  class="slider">
+		    <button type="button"  class="adelante" onclick="go(); StopMetronomo(); playAll(); ocultarplay()" id="go5" value="5">+ 5</button>
 		</div>
 		
 		<!--Play Stop-->
-		<div class="botonTabs"><button type="button" value="play" onclick="playAll(); ocultarplay()" id="play" class="tabs3"><i style='font-size:24px' class='fas'>&#xf04b;</i></button></div>
-		<div class="botonTabs"><button type="button" value="Stop" onclick="StopMetronomo(); mostrarplay()" id="stop" style="display:none" class="tabs3"><i style='font-size:24px' class='fas'>&#xf04d;</i></button></div>
+		<div class="botonTabs" onclick="playAll(); ocultarplay()"id="contentplay">
+		    <button type="button" value="play"  id="play" class="playStop">
+			    <li style='font-size:24px; list-style: none' class='fas'>&#xf04b;</li>
+			</button>
+		</div>
+		<div class="botonTabs" onclick="StopMetronomo(); mostrarplay()" id="contenstop" style="display: none">
+		    <button type="button" value="Stop"  id="stop" style="display:none" class="playStop">
+			    <li style='font-size:24p; list-style: none' class='fas'>&#xf04d;</li>
+			</button>
+		</div>
 		
 		<!--Circulos interactivos-->
 		<div class="contenedorCircle">
@@ -40,7 +53,14 @@
 		</div>
 		
 		<!--Muestra la subdivision actual-->
-		<p class="parrafos" id="subdivision"></p>
+		<div class="contenedorCompasDivision">
+		    <div class="botonTabs botonTabsPosition" onclick="abrirMenuCompas()">
+		       <button class="compas"><p id="innerCompas" class="bpm">4 / 4</p></button>
+		    </div>
+		    <div>
+			   <p class="parrafos" id="subdivision"></p>
+			</div>
+		</div>
 		<!--Seccion de subdivisiones--->
 		<div class="contenedorNotas">
 		    <div class="botonTabs"><button type="button" value="1" onclick="playNegras(); ocultarplay(); functionActive(event); subdivision.innerHTML = 'Negras'" class="tabs" id="playporDefecto">♩</button></div>
@@ -56,22 +76,60 @@
 		<!--Seleccionar compases posiciones absolutas-->
 		 <div class="contenedorElegirCompas" id="listaCompases">
 		    <p class="cerrarCompas" onclick="cerrarMenuCompas()">X</p>
-			<ul>
-				<li onclick="compasDosCua()">2 / 4</li>
-				<li onclick="compasTresCua()">3 / 4</li>
-			    <li onclick="compasCuatroCua()">4 / 4</li>
-			    <li onclick="compasCincoCua()">5 / 4</li>
-			    <li onclick="compasSeisCua()">6 / 4</li>
-			    <li onclick="compasSieteCua()">7 / 4</li>
-			    <li onclick="compasSeisOctavos()">6 / 8</li>
-			</ul>
+				<div class="botonTabs">
+				    <li onclick="compasDosCua()">2 / 4</li>
+				</div>
+				<div class="botonTabs">
+				    <li onclick="compasTresCua()">3 / 4</li>
+				</div>
+				<div class="botonTabs">
+			        <li onclick="compasCuatroCua()">4 / 4</li>
+				</div>
+				<div class="botonTabs">
+			        <li onclick="compasCincoCua()">5 / 4</li>
+				</div>
+				<div class="botonTabs">
+			        <li onclick="compasSeisCua()">6 / 4</li>
+				</div>
+				<div class="botonTabs">
+			        <li onclick="compasSieteCua()">7 / 4</li>
+				</div>
+				<div class="botonTabs">
+			        <li onclick="compasSeisOctavos()">6 / 8</li>
+				</div>
+			
 		</div>
-	    <div class="botonTabs botonTabsPosition" onclick="abrirMenuCompas()">
-		 <button class="tabs2"><p id="innerCompas" class="bpm">4 / 4</p></button>
+		<div class="contenedorLogo" onclick="abrirAjustes()">
+		    <i style='font-size:24px; color: #909090' class='fas'>&#xf013;</i>
 		</div>
-		<div class="contenedorLogo">
-		    <img src="Img/clave2.png">
+		<div class="contenedorConfiguracion" id="configuracion">
+		    <p class="cerrarCompas" onclick="cerrarAjustes()">X</p>
+		    <h2	 class="tituloconfig">Personalizar</h2>
+			<div>
+			    <p class="textConfiguracion">Elige un intervalo para que lo aumentes cada vez cada vez que domines el tempo actual.</p>
+		    </div> 
+            <div class="contenedorSelectRango">
+		        <button type="button"  class="atras" onclick="disminuirbeat();tempoUsuario()" id="disminuir" value="1">-</button>
+		            <input class="beatsUsuario"type="text" id="usuarioTempo" oninput="tempoUsuario()" size="3"  placeholder="5" >
+		        <button type="button"  class="adelante" onclick="aumentarbeat();tempoUsuario()" id="aumentar" value="1">+</button>
+		    </div>	
+		    <h2	 class="tituloconfig">Cambiar Tema</h2>		
+			<div>
+			    <p class="textConfiguracion">Elige un tema que te identifique.</p>
+		    </div> 
+			
+			<h2	 class="tituloconfig">Automatización</h2>		
+			<div>
+			    <p class="textConfiguracion">Elige las variaciones de compás.</p>
+		    </div> 
+			
 		</div>
+		<div>
+		    <h1></h1>
+		</div>
+	    
+		
+		
 		
 	
 		
@@ -101,6 +159,6 @@ var tabs = document.getElementsByClassName('tabs');
 }
 </script>
 
-	<script src="index.js"></script>
+	<script src="metronomo.js"></script>
 </body>
 </html>
