@@ -2,20 +2,27 @@
 	margin: 0;
 	padding: 0;
 }
+body {
+	background: url('Img/Fondo.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: 'Buda';
+}
 :root {
-	
+ 	
 	--main-backgroundbotones: #202020;
 	--main-background-color: linear-gradient(to bottom, #151515, #252525);
-	--main-backgroundprincipal: #101010;
+	--main-backgroundprincipal: #202020;
 	--main-borderbotones: 1px solid #202020;
 	--main-color : #909090;
 	--main-backgroundactive: #151515;
 	--main-coloractive: #ff0000;
 	--main-backgroundslider: #303030;
 	--main-backgroundfader: #606060	;
-	--main-backgroundAjustesCompas: rgba(0, 0, 0, 0.8);
+	--main-backgroundAjustesCompas: rgba(10, 10, 10, 0.9);
+	--main-backgroundhs: #151515;
 }
-/*  
+ /*	
 	--main-backgroundbotones: #300000;
 	--main-background-color: linear-gradient(to bottom, #250000, #350000);
 	--main-backgroundprincipal: #200000;
@@ -26,12 +33,11 @@
 	--main-backgroundslider: #400000;
 	--main-backgroundfader: #800000	;
 	--main-backgroundAjustesCompas: rgba(30, 0, 0, 0.8);
+	--main-backgroundhs: #150000;
 	}
-	
-	
 */
-
 .contenedorMetronomo {
+	top: 120px;
 	position: relative;
 	margin: auto;
 	width: 700px;
@@ -44,8 +50,25 @@
 	border-style: outset;
 	border-radius: 15px;
 }
-
 .contenedorLogo {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+} 
+.h1a, .h1b {
+	color: var(--main-backgroundslider);
+	font-size: 15px;
+	text-align: right;
+}
+.h1b {
+	font-size: 40px;
+	
+}
+.contenedorAjustes {
 	position: absolute;
 	top: 30px;
 	right: 30px;
@@ -60,18 +83,50 @@
 .tituloconfig {
 	width: 100%;
 	text-align: center;
+	background: var(--main-backgroundhs);
 	border-bottom: var(--main-borderbotones);
-	color: var(--main-backgroundfader);
+	color: var(--main-color);
 	margin-bottom: 5px;
+	font-size: 20px;
+}
+#ajustesLogo {
+	transition: 1s;
+}
+.contenedorCambiosTema {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.switchButton, .switchButtonRed, .switchButton2{
+	border: none;
+	outline: none;
+	background: none;
+	padding: 10px 20px;
+}
+.switchButton {
+	transform: rotate(180deg);
+	filter: grayscale(100%);	
+}
+.switchButtonRed{
+	transform: rotate(0deg);
+	filter: grayscale(0);
+}
+.switchButton2 {
+	transform: rotate(180deg);	
+}
+.switch {
+	width: 32px;
+	height: 32px;
+	background: var(--main-backgroundAjustesCompas);
 }
 .beatsUsuario {
 	border: none;
 	outline: none;
-	padding: 6px 0px 6px 0px;
 	text-align: center;
 	background: var(--main-backgroundbotones);
 	font-weight: bold;
 	color: var(--main-color);
+	font-size: 25px;
 }
 
 .contenedorElegirCompas, .contenedorConfiguracion {
@@ -107,26 +162,28 @@
 	cursor: pointer;
 }
 
-.contenedorElegirCompas::-webkit-scrollbar {
+.contenedorElegirCompas::-webkit-scrollbar, .contenedorConfiguracion::-webkit-scrollbar {
     -webkit-appearance: none;
 }
 
-.contenedorElegirCompas::-webkit-scrollbar:vertical {
-    width: 8px;
+.contenedorElegirCompas::-webkit-scrollbar:vertical, .contenedorConfiguracion::-webkit-scrollbar:vertical {
+    width: 5px;
 }
 
-.contenedorElegirCompas::-webkit-scrollbar-button:increment,.contenedorElegirCompas::-webkit-scrollbar-button {
+.contenedorElegirCompas::-webkit-scrollbar-button:increment,.contenedorElegirCompas::-webkit-scrollbar-button,
+.contenedorConfiguracion::-webkit-scrollbar-button:increment, .contenedorConfiguracion::-webkit-scrollbar-button {
     display: none;
 } 
 
-.contenedorElegirCompas::-webkit-scrollbar:horizontal {
+.contenedorElegirCompas::-webkit-scrollbar:horizontal,
+.contenedorConfiguracion::-webkit-scrollbar:horizontal{
     height: 10px;
 }
 
-.contenedorElegirCompas::-webkit-scrollbar-thumb {
-    background-color: #707070;
+.contenedorElegirCompas::-webkit-scrollbar-thumb,
+.contenedorConfiguracion::-webkit-scrollbar-thumb {
+    background-color: var(--main-backgroundactive);
     border-radius: 20px;
-    border: 2px solid #505050;
 }
 
 .contenedorElegirCompas::-webkit-scrollbar-track {
@@ -162,12 +219,18 @@
 }
 .botonTabs, .contenedorRango, .contenedorSelectRango{
 	background: var(--main-background-color);
-	border-radius: 12px;
+	border-radius: 15px;
 	margin: 2px;
 	padding: 4px;
  }
-.contenedorRango {margin-bottom: 15px; margin-top: 15px;}
+.contenedorRango {
+	margin-bottom: 15px; 
+	margin-top: 15px;
+}
 .contenedorSelectRango {
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
 	margin-bottom: 15px; 
 	margin-top: 15px;
 }
@@ -228,10 +291,12 @@
 .adelante {
 	border-radius: 0px 12px 12px 0px;
 	border-left: 1px solid #000;
+	font-size: 16px;
 }
 .atras {
 	border-radius: 12px 0px 0px 12px ;
 	border-right: 1px solid #000;
+	font-size: 16px;
 }
 .adelante:hover, .atras:hover{
 	box-shadow: 0px 0px 1px #ff0000;
@@ -279,16 +344,22 @@
 .circle {
 	padding: 15px;
 	border-radius: 50%;
-	background: var(--main-backgroundbotones);
+	background: var(--main-background-color);
 	transition: 0.5s;
 }
 .activeCircle {
 	background: #ff0000;
 }
 @media (max-width:700px){
+	body {
+		background: none;
+	}
 	.contenedorMetronomo {
 		width: 100%;
-		height: 100%;
+		height: 100vh;
+		border-radius: 0;
+	    top: 0;
+		overflow: auto;
 	}
 	.tabs4 {
 		width: 40%;
@@ -296,4 +367,11 @@
 	.contenedorCompasDivision {
 		width: 80%;
 	}
+	.h1a {
+		font-size: 12px;
+	}
+	.contenedorCircle {
+		width: 90%;
+	}
+   
 }

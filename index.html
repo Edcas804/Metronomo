@@ -7,7 +7,8 @@
 	<link rel="stylesheet" href="estilos.css">
 	<title>Metronomo</title>
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+		<link href='https://fonts.googleapis.com/css?family=Buda' rel='stylesheet'>
 </head>
 <body>
     <div class="contenedorMetronomo">
@@ -25,7 +26,7 @@
 		<div class="contenedorRango">
 		    <button type="button"  class="atras" onclick="back(); StopMetronomo();  playAll(); ocultarplay()" id="back5" value="-5">- 5</button>
 		    <input type="range" min="20" max="220" id="rangoTempo" value="80" 
-		    oninput="mostrarTempoRango(); StopMetronomo(); playAll(); ; ocultarplay()"  class="slider">
+		    oninput="mostrarTempoRango(); StopMetronomo(); mostrarplay()"  class="slider">
 		    <button type="button"  class="adelante" onclick="go(); StopMetronomo(); playAll(); ocultarplay()" id="go5" value="5">+ 5</button>
 		</div>
 		
@@ -67,7 +68,7 @@
 		    <div class="botonTabs"><button type="button" value="1/2"  onclick="playCorcheas();  ocultarplay(); functionActive(event)"class="tabs">♫</button></div>
 		    <div class="botonTabs"><button type="button" value="3"  onclick="playTresillos(); ocultarplay(); functionActive(event)" class="tabs">♪♪♪</button></div>
 		    <div class="botonTabs"> <button type="button" value="4" onclick="playsemiCorcheas(); ocultarplay(); functionActive(event)" class="tabs">♬</button></div>
-		    <div style="display:none" class="botonTabs" > <button type="button" value="tresilloNegra" onclick="playtresilloNegra(); ocultarplay(); functionActive(event)" class="tabs">♩♩♩</button></div>
+		    <div class="botonTabs" > <button type="button" value="tresilloNegra" onclick="playtresilloNegra(); ocultarplay(); functionActive(event)" class="tabs">♩♩♩</button></div>
 	        <div class="botonTabs"><button type="button" value="Galopa" onclick="playGalopa(); ocultarplay(); functionActive(event)" class="tabs">♪♬</button></div>
 		    <div class="botonTabs"> <button type="button" value="contraGalopa" onclick="playcontraGalopa(); ocultarplay(); functionActive(event)" class="tabs">♬♪</button></div>
 		    <div class="botonTabs"> <button type="button" value="Sincopa" onclick="playSincopa(); ocultarplay(); functionActive(event)" class="tabs">♬♪ </button></div>
@@ -99,8 +100,8 @@
 				</div>
 			
 		</div>
-		<div class="contenedorLogo" onclick="abrirAjustes()">
-		    <i style='font-size:24px; color: #909090' class='fas'>&#xf013;</i>
+		<div class="contenedorAjustes" onclick="abrirAjustes()">
+		    <i style='font-size:24px; color: #909090' class='fas' id="ajustesLogo">&#xf013;</i>
 		</div>
 		<div class="contenedorConfiguracion" id="configuracion">
 		    <p class="cerrarCompas" onclick="cerrarAjustes()">X</p>
@@ -109,23 +110,43 @@
 			    <p class="textConfiguracion">Elige un intervalo para que lo aumentes cada vez cada vez que domines el tempo actual.</p>
 		    </div> 
             <div class="contenedorSelectRango">
-		        <button type="button"  class="atras" onclick="disminuirbeat();tempoUsuario()" id="disminuir" value="1">-</button>
+		        <button type="button"  class="atras" onclick="disminuirbeat();tempoUsuario()" id="disminuir" value="1"><span style="visibility:hidden">--</span>-<span style="visibility:hidden">--</span></button>
 		            <input class="beatsUsuario"type="text" id="usuarioTempo" oninput="tempoUsuario()" size="3"  placeholder="5" >
-		        <button type="button"  class="adelante" onclick="aumentarbeat();tempoUsuario()" id="aumentar" value="1">+</button>
+		        <button type="button"  class="adelante" onclick="aumentarbeat();tempoUsuario()" id="aumentar" value="1"><span style="visibility:hidden">--</span>+<span style="visibility:hidden">--</span></button>
 		    </div>	
 		    <h2	 class="tituloconfig">Cambiar Tema</h2>		
-			<div>
-			    <p class="textConfiguracion">Elige un tema que te identifique.</p>
+			<div class="contenedorCambiosTema">
+			    <p class="textConfiguracion">Dark</p>
+				<button type="button" value="tema" onclick="cambiarTemaRed()" class="switchButton" id="Dark"><img src="Img/Switch.png" class="switch"></button>
+				<button type="button" value="tema" onclick="cambiarTemaDark()" class="switchButtonRed" id="Red" style="display: none"><img src="Img/Switch.png" class="switch"></button>
+				<p class="textConfiguracion">Red</p>
 		    </div> 
 			
+			<h2	 class="tituloconfig">Acento en el 1er tiempo.</h2>		
+			<div class="contenedorCambiosTema">
+			    <p class="textConfiguracion">Desactivar</p>
+				<button type="button"  onclick="AcentoPrimerOff()" class="switchButton2" id="desactivar" style="display: none"><img src="Img/Switch.png" class="switch"></button>
+				<button type="button"  onclick="AcentoPrimerOn()" class="switchButtonRed" id="activar" ><img src="Img/Switch.png" class="switch"></button>
+				<p class="textConfiguracion">Activar</p>
+		    </div> 
+			<h2	 class="tituloconfig">Automatización</h2>		
+			<div>
+			    <p class="textConfiguracion">Elige las variaciones de compás.</p>
+		    </div> 
 			<h2	 class="tituloconfig">Automatización</h2>		
 			<div>
 			    <p class="textConfiguracion">Elige las variaciones de compás.</p>
 		    </div> 
 			
 		</div>
-		<div>
-		    <h1></h1>
+		<div class="contenedorLogo">
+		    <div>
+		        <h1 class="h1a">H</h1>
+		        <h1 class="h1a">Soun</h1>
+			</div>
+			<div>
+			    <h1 class="h1b">D</h1>
+			</div>
 		</div>
 	    
 		

@@ -1,20 +1,63 @@
 //abrir cerrar selector de compases
+var dark = false;
+var red = false
+function cambiarTemaRed(){
+	document.getElementById('Dark').style.display = 'none';
+	document.getElementById('Red').style.display = 'block';
+	
+	document.documentElement.style.setProperty('--main-backgroundbotones', '#300000');
+	document.documentElement.style.setProperty('--main-background-color', 'linear-gradient(to bottom, #250000, #350000)');
+	document.documentElement.style.setProperty('--main-backgroundprincipal', '#300000');
+	document.documentElement.style.setProperty('--main-borderbotones', '1px solid #300000');
+	document.documentElement.style.setProperty('--main-color', '909090');
+	document.documentElement.style.setProperty('--main-backgroundactive', '200000');
+	document.documentElement.style.setProperty('--main-coloractive', '#ff0000');
+	document.documentElement.style.setProperty('--main-backgroundslider', '#400000');
+	document.documentElement.style.setProperty('--main-backgroundfader', '#800000');
+	document.documentElement.style.setProperty('--main-backgroundAjustesCompas', 'rgba(30, 0, 0, 0.9)');
+	document.documentElement.style.setProperty('--main-backgroundhs', '#150000');
+	dark = false;
+    red = true;
+}
+function cambiarTemaDark(){
+	document.getElementById('Dark').style.display = 'block';
+	document.getElementById('Red').style.display = 'none';
+	
+	document.documentElement.style.setProperty('--main-backgroundbotones', '#202020');
+	document.documentElement.style.setProperty('--main-background-color', 'linear-gradient(to bottom, #151515, #252525)');
+	document.documentElement.style.setProperty('--main-backgroundprincipal', '#202020');
+	document.documentElement.style.setProperty('--main-borderbotones', '1px solid #202020');
+	document.documentElement.style.setProperty('--main-color', '909090');
+	document.documentElement.style.setProperty('--main-backgroundactive', '151515');
+	document.documentElement.style.setProperty('--main-coloractive', '#ff0000');
+	document.documentElement.style.setProperty('--main-backgroundslider', '#303030');
+	document.documentElement.style.setProperty('--main-backgroundfader', '#606060');
+	document.documentElement.style.setProperty('--main-backgroundAjustesCompas', 'rgba(10, 10, 10, 0.9)');
+	document.documentElement.style.setProperty('--main-backgroundhs', '#151515');
+	dark = true;
+    red = false;
+	
+}
 function cerrarMenuCompas(){
 	document.getElementById('listaCompases').style.width = '0%';
 	document.getElementById('listaCompases').style.visibility = 'hidden';
+	document.getElementById('ajustesLogo').style.transform = 'rotate(0deg)';
 }
 function abrirMenuCompas(){
-	document.getElementById('listaCompases').style.width = '50%';
+	document.getElementById('listaCompases').style.width = '70%';
 	document.getElementById('listaCompases').style.visibility = 'visible';
+	document.getElementById('ajustesLogo').style.transform = 'rotate(360deg)';
 }
 //abrir cerrar configuracion
 function cerrarAjustes(){
 	document.getElementById('configuracion').style.width = '0%';
 	document.getElementById('configuracion').style.visibility = 'hidden';
+	document.getElementById('ajustesLogo').style.transform = 'rotate(0deg)';
 }
 function abrirAjustes(){
-	document.getElementById('configuracion').style.width = '50%';
+	document.getElementById('configuracion').style.width = '70%';
 	document.getElementById('configuracion').style.visibility = 'visible';
+	document.getElementById('ajustesLogo').style.transform = 'rotate(360deg)';
 }
 // mostrar play stop
 function mostrarplay(){
@@ -233,7 +276,19 @@ var Saltillobo = false;
 	const beat4b = new Audio("Audio/semicorchea2.wav");
 	
 	
-//function para negras simles
+//Desactivar acento en el primer tiempo
+function AcentoPrimerOff(){
+	document.getElementById('desactivar').style.display = 'none';
+	document.getElementById('activar').style.display = 'block';
+	beatNegraAcento = new Audio("Audio/negraA.wav");
+	
+}
+function AcentoPrimerOn(){
+	document.getElementById('activar').style.display = 'none';
+	document.getElementById('desactivar').style.display = 'block';
+	beatNegraAcento = beatNegra;
+	
+}
 //Conversion del tiempo de entrada a bpm
 	
 	tempoIn = document.getElementById('valorTempo').value;
@@ -259,9 +314,9 @@ var Saltillobo = false;
 	var semicorchea = -3;
 	var tresillocorchea = -2;
 	var tresilloNegra = 3;
-	var Galopa = -3;
+	var Galopa = 4;
 	var contraGalopa = -3;
-	var Sincopa = -3;
+	var Sincopa = 4;
 	var Saltillo = -3;
 	
 function playNegras(){
@@ -272,82 +327,164 @@ function playNegras(){
 	tempoIn = document.getElementById('valorTempo').value; 
 	//Intervalos de tempo
 	tempoNegra = 60000/tempoIn;
-	
+	negra = compas;
 	//Negras
 	MetronomoNegra = setInterval(FuncionNegra, tempoNegra);
 	
 	function FuncionNegra(){
 	
-		if(negra >= compas){
+		if(negra >= compas && red == false){
 			negra = 1;
-			for( i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#000';
-			   circles[i].style.transform = 'scale(1)';
-	        }
-			circles[0].style.background = '#b50000';
-			circles[0].style.transform = 'scale(1.5)';
 			beatNegraAcento.play();
-			
+		    for( i = 0; i < circles.length; i++){
+		    circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
+			circles[i].style.transform = 'scale(1)';
+			circles[0].style.background = '#b50000';
+			circles[0].style.transform = 'scale(2)';
+	        }
+		}
+		//******************
+		else if(negra >= compas && red == true){
+			negra = 1;
+			beatNegraAcento.play();
+		    for( i = 0; i < circles.length; i++){
+		    circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
+			circles[i].style.transform = 'scale(1)';
+			circles[0].style.background = '#b50000';
+			circles[0].style.transform = 'scale(2)';
+	        }
+						
 			//document.getElementById('circle1').style.background = '#ff0000';
 		}
-		else if(negra == 1){
+		//*******************************
+		else if(negra == 1 && red == false){
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#000';
+		       circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[1].style.background = '#900000';
-			circles[1].style.transform = 'scale(1.2)';
+			circles[1].style.background = '#ff0000';
+			circles[1].style.transform = 'scale(1.8)';
 			beatNegra.play();
 		}
-		else if(negra == 2){
+		else if(negra == 1 && red == true){
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#000';
+		       circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[2].style.background = '#900000';
-			circles[2].style.transform = 'scale(1.2)';
+			circles[1].style.background = '#ff0000';
+			circles[1].style.transform = 'scale(1.8)';
 			beatNegra.play();
 		}
-		else if(negra == 4){
+		else if(negra == 2 && red == false){
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#000';
+		       circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[4].style.background = '#900000';
+			circles[2].style.background = '#dd0000';
+			circles[2].style.transform = 'scale(1.6)';
+			beatNegra.play();
+		}
+		else if(negra == 2 && red == true){
+			negra++;
+			for( var i = 0; i < circles.length; i++){
+		       circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
+			   circles[i].style.transform = 'scale(1)';
+	        }
+			circles[2].style.background = '#dd0000';
+			circles[2].style.transform = 'scale(1.6)';
+			beatNegra.play();
+		}
+		else if(negra == 3 && red == false){
+			negra++;
+			for( var i = 0; i < circles.length; i++){
+		       circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
+			   circles[i].style.transform = 'scale(1)';
+	        }
+			circles[3].style.background = '#cc0000';
+			circles[3].style.transform = 'scale(1.4)';
+			beatNegra.play();
+		}
+		else if(negra == 3 && red == true){
+			negra++;
+			for( var i = 0; i < circles.length; i++){
+		       circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
+			   circles[i].style.transform = 'scale(1)';
+	        }
+			circles[3].style.background = '#cc0000';
+			circles[3].style.transform = 'scale(1.4)';
+			beatNegra.play();
+		}
+		else if(negra == 4 && red == false){
+			negra++;
+			for( var i = 0; i < circles.length; i++){
+		       circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
+			   circles[i].style.transform = 'scale(1)';
+	        }
+			circles[4].style.background = '#bb0000';
 			circles[4].style.transform = 'scale(1.2)';
 			beatNegra.play();
 		}
-		else if(negra == 5){
+		else if(negra == 4 && red == true){
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#000';
+		       circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[5].style.background = '#900000';
-			circles[5].style.transform = 'scale(1.2)';
+			circles[4].style.background = '#bb0000';
+			circles[4].style.transform = 'scale(1.2)';
 			beatNegra.play();
 		}
-		else if(negra == 6){
+		else if(negra == 5 && red == false){
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#000';
+		       circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[6].style.background = '#900000';
-			circles[6].style.transform = 'scale(1.2)';
+			circles[5].style.background = '#aa0000';
+			circles[5].style.transform = 'scale(1)';
+			beatNegra.play();
+		}
+		else if(negra == 5 && red == true){
+			negra++;
+			for( var i = 0; i < circles.length; i++){
+		       circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
+			   circles[i].style.transform = 'scale(1)';
+	        }
+			circles[5].style.background = '#aa0000';
+			circles[5].style.transform = 'scale(1)';
+			beatNegra.play();
+		}
+		else if(negra == 6 && red == false){
+			negra++;
+			for( var i = 0; i < circles.length; i++){
+		       circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
+			   circles[i].style.transform = 'scale(1)';
+	        }
+			circles[6].style.background = '#800000';
+			circles[6].style.transform = 'scale(0.8)';
+			beatNegra.play();
+		}
+		else if(negra == 6 && red == true){
+			negra++;
+			for( var i = 0; i < circles.length; i++){
+		       circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
+			   circles[i].style.transform = 'scale(1)';
+	        }
+			circles[6].style.background = '#800000';
+			circles[6].style.transform = 'scale(0.8)';
 			beatNegra.play();
 		}
 		else{
 			negra++;
 			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = '#000';
+		       circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
 			   circles[i].style.transform = 'scale(1)';
 	        }
-			circles[3].style.background = '#900000';
-			circles[3].style.transform = 'scale(1.2)';
+			circles[3].style.background = '#600000';
+			circles[3].style.transform = 'scale(0.6)';
 			beatNegra.play();
 			
 			//document.getElementById('circle1').style.background = '#b5b5b5';
@@ -376,8 +513,8 @@ function playCorcheas(){
 	//Negras
 	
 	
-	
 	//Corcheas
+	setTimeout(function(){
 	MetronomoCorchea = setInterval(FuncionCorchea, tempoCorchea);
 	function FuncionCorchea(){
 		if(corchea >= 2){
@@ -387,7 +524,11 @@ function playCorcheas(){
 			corchea++;
 			beat4a.play();
 		}
-	}
+	}	
+	}, tempoNegra)
+	
+	
+	
 	 negrabo = false;
      corcheabo = true;
      tresillobo = false;
@@ -398,6 +539,7 @@ function playCorcheas(){
 	 Sincopabo = false;
 	 Saltillobo = false;
 }
+
 function playTresillos(){
 		subdivision.innerHTML = 'Tresillos de corcheas';
 	StopMetronomo();
@@ -409,6 +551,7 @@ function playTresillos(){
 	var tempoTresilloCorchea= tempoNegra / 3;
 	
 	//tresillos de corchea
+	setTimeout(function(){
 	MetronomoTresilloCorchea = setInterval(FuncionTresillosCorchea, tempoTresilloCorchea);
 	function FuncionTresillosCorchea(){
 		if(tresillocorchea >= 3){
@@ -424,6 +567,7 @@ function playTresillos(){
 			beat4b.play();
 		}
 	}
+	}, tempoNegra);
 	negrabo = false;
     corcheabo = false;
     tresillobo = true;
@@ -444,7 +588,7 @@ function playsemiCorcheas(){
 	var tempoNegra = 60000/tempoIn;
 	var tempoSemiCorchea= tempoNegra / 4;
 	
-	
+	setTimeout(function(){
 	//Semicorcheas
 	MetronomoSemiCorchea = setInterval(FuncionSemiCorchea, tempoSemiCorchea);
 	function FuncionSemiCorchea(){
@@ -466,6 +610,7 @@ function playsemiCorcheas(){
 			beat4b.play();
 		}
 	}
+	}, tempoNegra);
 	negrabo = false;
     corcheabo = false;
     tresillobo = false;
@@ -485,8 +630,12 @@ function playtresilloNegra(){
 	//Intervalos de tempo
 	var tempoNegra = 60000/tempoIn;
 	var tempoTresilloNegra= (tempoNegra * 2) / 3;
+	console.log('negra: ' + tempoNegra);
+	console.log('tresiilo: ' + tempoTresilloNegra);
 	
-	//tresillos de corchea
+	var tresilloNegra = 3;
+	setTimeout(function(){
+		//tresillos de corchea
 	MetronomoTresilloNegra = setInterval(FuncionTresilloNegra, tempoTresilloNegra);
 	function FuncionTresilloNegra(){
 		if(tresilloNegra >= 3){
@@ -502,6 +651,8 @@ function playtresilloNegra(){
 			beat4b.play();
 		}
 	}
+	}, tempoNegra)
+	
 	negrabo = false;
     corcheabo = false;
     tresillobo = false;
@@ -523,7 +674,9 @@ function playGalopa(){ //el tiempo es el mismo que el de las semicorcheas, solo 
 	var tempoNegra = 60000/tempoIn;
 	var tempoSemiCorchea= tempoNegra / 4;
 	
+			Galopa = 1;
 	
+	setTimeout(function(){
 	//Semicorcheas
 	MetronomoGalopa = setInterval(FuncionGalopa, tempoSemiCorchea);
 	function FuncionGalopa(){
@@ -544,6 +697,7 @@ function playGalopa(){ //el tiempo es el mismo que el de las semicorcheas, solo 
 			beat4b.play();
 		}
 	}
+	}, tempoNegra);
 	negrabo = false;
     corcheabo = false;
     tresillobo = false;
@@ -564,7 +718,7 @@ function playcontraGalopa(){
 	var tempoNegra = 60000/tempoIn;
 	var tempoSemiCorchea= tempoNegra / 4;
 	
-	
+	setTimeout(function(){
 	//Semicorcheas
 	MetronomoContraGalopa = setInterval(FuncionContraGalopa, tempoSemiCorchea);
 	function FuncionContraGalopa(){
@@ -586,6 +740,7 @@ function playcontraGalopa(){
 			//No lleva audio para crear el efecto galopa
 		}
 	}
+	}, StopMetronomo);
 	negrabo = false;
     corcheabo = false;
     tresillobo = false;
@@ -605,11 +760,12 @@ function playSincopa(){
 	//Intervalos de tempo
 	var tempoNegra = 60000/tempoIn;
 	var tempoSemiCorchea= tempoNegra / 4;
-	
-	
+	Sincopa = 1;
+	setTimeout(function(){
 	//Semicorcheas
 	MetronomoSincopa = setInterval(FuncionSincopa, tempoSemiCorchea);
 	function FuncionSincopa(){
+		
 		if(Sincopa == 4){
 			Sincopa = 1;
 			beat4a.play();
@@ -627,6 +783,7 @@ function playSincopa(){
 			beat4.play();
 		}
 	}
+	}, tempoNegra);
 	negrabo = false;
     corcheabo = false;
     tresillobo = false;
@@ -646,8 +803,9 @@ function playSaltillo(){
 	//Intervalos de tempo
 	var tempoNegra = 60000/tempoIn;
 	var tempoSemiCorchea= tempoNegra / 4;
+			Saltillo = 1;
 	
-	
+	setTimeout(function(){
 	//Semicorcheas
 	MetronomoSaltillo = setInterval(FuncionSaltillo, tempoSemiCorchea);
 	function FuncionSaltillo(){
@@ -668,6 +826,7 @@ function playSaltillo(){
 			beat4.play();
 		}
 	}
+	}, tempoNegra);
 	negrabo = false;
     corcheabo = false;
     tresillobo = false;
