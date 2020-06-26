@@ -50,6 +50,20 @@ body {
 	border-style: outset;
 	border-radius: 15px;
 }
+.contenderorCompasesIlus {
+	width: 80%;
+	background: var(--main-backgroundbotones);
+	border-radius: 12px;
+	position: relative;
+	
+	
+}
+#Negras {
+	border-radius: 0px 0px 12px 12px;
+}
+.verCompas {
+	position: absolute;	
+}
 .contenedorLogo {
 	position: absolute;
 	top: 20px;
@@ -249,6 +263,29 @@ body {
 	box-shadow: 1px 2px 2px #101010;
 	
 }
+.tabs {
+	filter: grayscale(100%);
+	position: relative;
+	color: #454545;
+}
+.tabsImg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 48px;
+	height: 48px;
+	background: var(--main-backgroundbotones);
+	color: var(--main-color);
+	border-radius: 8px;
+}
+.texttresillos {
+	position: absolute;
+	top: 0;
+	left: 48%;
+	color: #505050;
+	font-size: 9px;
+	color: #ff0000;
+}
 .parrafos {
 	color: var(--main-color);	
 }
@@ -304,8 +341,8 @@ body {
 }
 
 .active {
+	filter: grayscale(0);
 	transform: scale(0.95);
-	background: var(--main-backgroundactive);
 	font-weight: bold;
 	border: 2px solid #252525;
 	border-style: inset;
@@ -374,4 +411,7 @@ body {
 		width: 90%;
 	}
    
+}
+.ocultar{
+	display: none;
 }
