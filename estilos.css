@@ -142,7 +142,10 @@ body {
 	color: var(--main-color);
 	font-size: 25px;
 }
-
+.contenedorfiguras {
+	background: var(--main-backgroundbotones);
+	width: 80%;
+}
 .contenedorElegirCompas, .contenedorConfiguracion {
 	position: absolute;
 	display: flex;
@@ -268,7 +271,7 @@ body {
 	position: relative;
 	color: #454545;
 }
-.tabsImg {
+.tabsImg, .tabsImg2 {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -277,6 +280,9 @@ body {
 	background: var(--main-backgroundbotones);
 	color: var(--main-color);
 	border-radius: 8px;
+}	
+.tabsImg2 {
+	display: none;
 }
 .texttresillos {
 	position: absolute;
@@ -284,7 +290,6 @@ body {
 	left: 48%;
 	color: #505050;
 	font-size: 9px;
-	color: #ff0000;
 }
 .parrafos {
 	color: var(--main-color);	
@@ -341,12 +346,11 @@ body {
 }
 
 .active {
-	filter: grayscale(0);
 	transform: scale(0.95);
 	font-weight: bold;
 	border: 2px solid #252525;
 	border-style: inset;
-	color: var(--main-coloractive);
+	color: #505050;
 	box-shadow: none;
 }
 .slider {
@@ -414,4 +418,27 @@ body {
 }
 .ocultar{
 	display: none;
+}
+.decoracion1, .decoracion2, .decoracion3, .decoracion4 {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background: var(--main-backgroundhs);
+	border-radius: 50%;
+}
+.decoracion1 {
+	top: 5px;
+	left: 5px;
+}
+.decoracion2 {
+	top: 5px;
+	right: 5px;
+}
+.decoracion3 {
+	bottom: 5px;
+	right: 5px;
+}
+.decoracion4 {
+	bottom: 5px;
+	left: 5px;
 }

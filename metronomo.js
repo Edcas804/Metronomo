@@ -4,7 +4,18 @@ var red = false
 function cambiarTemaRed(){
 	document.getElementById('Dark').style.display = 'none';
 	document.getElementById('Red').style.display = 'block';
-	
+	var imgRed = document.getElementsByClassName('tabsImg2');
+	 for (i = 0; i < imgRed.length; i++) {
+            imgRed[i].style.display = "block";
+        }
+	var imgRed2 = document.getElementsByClassName('tabsImg');
+	 for (i = 0; i < imgRed2.length; i++) {
+            imgRed2[i].style.display = "none";
+        }
+	var brightness = document.getElementsByClassName('tabs');
+	 for (i = 0; i < brightness.length; i++) {
+            brightness[i].style.filter = "grayscale(0)";
+        }	
 	document.documentElement.style.setProperty('--main-backgroundbotones', '#300000');
 	document.documentElement.style.setProperty('--main-background-color', 'linear-gradient(to bottom, #250000, #350000)');
 	document.documentElement.style.setProperty('--main-backgroundprincipal', '#300000');
@@ -23,6 +34,18 @@ function cambiarTemaDark(){
 	document.getElementById('Dark').style.display = 'block';
 	document.getElementById('Red').style.display = 'none';
 	
+	var imgRed = document.getElementsByClassName('tabsImg2');
+	 for (i = 0; i < imgRed.length; i++) {
+            imgRed[i].style.display = "none";
+        }
+	var imgRed2 = document.getElementsByClassName('tabsImg');
+	 for (i = 0; i < imgRed2.length; i++) {
+            imgRed2[i].style.display = "block";
+        }
+	var brightness = document.getElementsByClassName('tabs');
+	 for (i = 0; i < brightness.length; i++) {
+            brightness[i].style.filter = "grayscale(100%)";
+        }
 	document.documentElement.style.setProperty('--main-backgroundbotones', '#202020');
 	document.documentElement.style.setProperty('--main-background-color', 'linear-gradient(to bottom, #151515, #252525)');
 	document.documentElement.style.setProperty('--main-backgroundprincipal', '#202020');
@@ -38,27 +61,17 @@ function cambiarTemaDark(){
     red = false;
 	
 }
-function cerrarMenuCompas(){
-	document.getElementById('listaCompases').style.width = '0%';
-	document.getElementById('listaCompases').style.visibility = 'hidden';
+function cerrarMenuCompas(ventana){
+	document.getElementById(ventana).style.width = '0%';
+	document.getElementById(ventana).style.visibility = 'hidden';
 	document.getElementById('ajustesLogo').style.transform = 'rotate(0deg)';
 }
-function abrirMenuCompas(){
-	document.getElementById('listaCompases').style.width = '70%';
-	document.getElementById('listaCompases').style.visibility = 'visible';
+function abrirMenuCompas(ventana){
+	document.getElementById(ventana).style.width = '70%';
+	document.getElementById(ventana).style.visibility = 'visible';
 	document.getElementById('ajustesLogo').style.transform = 'rotate(360deg)';
 }
-//abrir cerrar configuracion
-function cerrarAjustes(){
-	document.getElementById('configuracion').style.width = '0%';
-	document.getElementById('configuracion').style.visibility = 'hidden';
-	document.getElementById('ajustesLogo').style.transform = 'rotate(0deg)';
-}
-function abrirAjustes(){
-	document.getElementById('configuracion').style.width = '70%';
-	document.getElementById('configuracion').style.visibility = 'visible';
-	document.getElementById('ajustesLogo').style.transform = 'rotate(360deg)';
-}
+
 // mostrar play stop
 function mostrarplay(){
 	document.getElementById('play').style.display = 'block';
@@ -117,7 +130,6 @@ function go(){
 		document.getElementById('valorTempo').value = tempoGo;
 		document.getElementById('rangoTempo').value = tempoGo;
 		tempoRango = tempoGo;
-		console.log(tempoGo);
 }
  var beatuseraumentar = document.getElementById('aumentar').value;
  var beatuserDisminuir = document.getElementById('disminuir').value;
@@ -131,7 +143,6 @@ function disminuirbeat(){
 	    disbeat = parseInt(usuarioTempo) - parseInt(beatuserDisminuir);
 	    usuarioTempo = disbeat;
 		document.getElementById('usuarioTempo').value = disbeat;
-		console.log(disbeat);
 		
 }
 function aumentarbeat(){
@@ -152,7 +163,7 @@ function validarBinarioTernario(){
 	     binarios = document.getElementsByClassName('binario');
          ternarios = document.getElementsByClassName("ternario");
 	var i;
-	if(compasseisporOcho == true){
+	if(compasseisporOcho == true || compasNueveOcho == true || compasDoceporOcho == true || compasTresporOcho == true){
 		
        for (i = 0; i < binarios.length; i++) {
             binarios[i].style.display = "none";
@@ -161,23 +172,10 @@ function validarBinarioTernario(){
 		for(i = 0; i < ternarios.length; i++){
 			ternarios[i].style.display = 'block';
 		}
-		document.getElementById('Seis').style.display = 'block';
-		document.getElementById('Doce').style.display = 'none';
+		document.getElementById('ternarioNegra').style.display = 'block';
 		
-		for(i = 0; i < binarios.length; i++){
-		binarios[i].classList.add ("ocultar");
 	}
-	}
-	else if(compasDoceporOcho == true){
-		for(i = 0; i < binarios.length; i++){
-			binarios[i].style.display = 'none';
-		}
-		for(i = 0; i < ternarios.length; i++){
-			ternarios[i].style.display = 'block';
-		}
-		document.getElementById('Seis').style.display = 'none';
-		document.getElementById('Doce').style.display = 'block';
-	}
+	
 	else{
 		for(i = 0; i < binarios.length; i++){
 			binarios[i].style.display = 'block';
@@ -185,13 +183,14 @@ function validarBinarioTernario(){
 		for(i = 0; i < ternarios.length; i++){
 			ternarios[i].style.display = 'none';
 		}
-		document.getElementById('Seis').style.display = 'none';
-		document.getElementById('Doce').style.display = 'none';
+		document.getElementById('ternarioNegra').style.display = 'none';
 	}
 }	
 var compas = 4; // es global para que cambie según la funcion 
 var compasNegras = false;
+var	compasTresporOcho = false;
 var compasseisporOcho = false
+var	compasNueveOcho = false;
 var compasDoceporOcho = false
 function compasDosCua(){
 	compas = 2;
@@ -206,9 +205,11 @@ function compasDosCua(){
 	document.getElementById('circle7').style.display = 'none';
 	
 	//	cerrar el menu
-	cerrarMenuCompas();
+	cerrarMenuCompas('listaCompases');
 	compasNegras = true;
+	compasTresporOcho = false
 	compasseisporOcho = false;
+	compasNueveOcho = false;
     compasDoceporOcho = false;
 	validarBinarioTernario();
 		StopMetronomo();
@@ -227,9 +228,11 @@ function compasTresCua(){
 	document.getElementById('circle6').style.display = 'none';
 	document.getElementById('circle7').style.display = 'none';
 	//	cerrar el menu
-	cerrarMenuCompas();
+	cerrarMenuCompas('listaCompases');
 	compasNegras = true;
+	compasTresporOcho = false;
 	compasseisporOcho = false;
+	compasNueveOcho = false;
     compasDoceporOcho = false;
 	validarBinarioTernario();
 		StopMetronomo();
@@ -247,9 +250,11 @@ function compasCuatroCua(){
 	document.getElementById('circle6').style.display = 'none';
 	document.getElementById('circle7').style.display = 'none';
 	//	cerrar el menu
-	cerrarMenuCompas();
+	cerrarMenuCompas('listaCompases');
 	compasNegras = true;
+	compasTresporOcho = false;
 	compasseisporOcho = false;
+	compasNueveOcho = false;
     compasDoceporOcho = false;
 	validarBinarioTernario();
 	 document.getElementById('playporDefecto').click(); 	
@@ -266,9 +271,11 @@ function compasCincoCua(){
 	document.getElementById('circle6').style.display = 'none';
 	document.getElementById('circle7').style.display = 'none';
 	//	cerrar el menu
-	cerrarMenuCompas();
+	cerrarMenuCompas('listaCompases');
 	compasNegras = true;
+	compasTresporOcho = false;
 	compasseisporOcho = false;
+	compasNueveOcho = false;
     compasDoceporOcho = false;
 	validarBinarioTernario();
 		StopMetronomo();
@@ -286,9 +293,11 @@ function compasSeisCua(){
 	document.getElementById('circle6').style.display = 'Block';
 	document.getElementById('circle7').style.display = 'none';
 	//	cerrar el menu
-	cerrarMenuCompas();
+	cerrarMenuCompas('listaCompases');
 	compasNegras = true;
 	compasseisporOcho = false;
+	compasTresporOcho = false;
+	compasNueveOcho = false;
     compasDoceporOcho = false;
 	validarBinarioTernario();
 		StopMetronomo();
@@ -306,13 +315,35 @@ function compasSieteCua(){
 	document.getElementById('circle6').style.display = 'Block';
 	document.getElementById('circle7').style.display = 'Block';
 	//	cerrar el menu
-	cerrarMenuCompas();
+	cerrarMenuCompas('listaCompases');
 	compasNegras = true;
+	compasTresporOcho = false;
 	compasseisporOcho = false;
+	compasNueveOcho = false;
     compasDoceporOcho = false;
 	validarBinarioTernario();
 		StopMetronomo();
 	 document.getElementById('playporDefecto').click(); 	
+}
+function compasTresOcho(){
+	compas = 1;
+	document.getElementById('innerCompas').innerHTML = '3 / 8';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'none';
+	document.getElementById('circle3').style.display = 'none';
+	document.getElementById('circle4').style.display = 'none';
+	document.getElementById('circle5').style.display = 'none';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = false;
+	compasTresporOcho = true;
+	compasseisporOcho = false;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	validarBinarioTernario();
 }
 function compasSeisOcho(){
 	compas = 2;
@@ -326,9 +357,31 @@ function compasSeisOcho(){
 	document.getElementById('circle6').style.display = 'none';
 	document.getElementById('circle7').style.display = 'none';
 	//	cerrar el menu
-	cerrarMenuCompas();
+	cerrarMenuCompas('listaCompases');
 	compasNegras = false;
+	compasTresporOcho = false;
 	compasseisporOcho = true;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	validarBinarioTernario();
+}
+function compasNueveporOcho(){
+	compas = 3;
+	document.getElementById('innerCompas').innerHTML = '9 / 8';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'Block';
+	document.getElementById('circle3').style.display = 'Block';
+	document.getElementById('circle4').style.display = 'none';
+	document.getElementById('circle5').style.display = 'none';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = false;
+	compasTresporOcho = false;
+	compasseisporOcho = false;
+	compasNueveOcho = true;
     compasDoceporOcho = false;
 	validarBinarioTernario();
 }
@@ -344,9 +397,11 @@ function compasDoceOcho(){
 	document.getElementById('circle6').style.display = 'none';
 	document.getElementById('circle7').style.display = 'none';
 	//	cerrar el menu
-	cerrarMenuCompas();
+	cerrarMenuCompas('listaCompases');
 	compasNegras = false;
+	compasTresporOcho = false;
 	compasseisporOcho = false;
+	compasNueveOcho = false;
     compasDoceporOcho = true;
 	validarBinarioTernario();
 }
@@ -365,8 +420,7 @@ var MetronomoGalopa;
 var MetronomoContraGalopa;
 var MetronomoSincopa;
 var MetronomoSaltillo;
-var MetronomoSeisOctavos;
-var MetronomoDoceOctavos;
+var MetronomoTernario;
 
 var negrabo = false;
 var corcheabo = false;
@@ -378,15 +432,11 @@ var contraGalopabo = false;
 var Sincopabo = false;
 var Saltillobo = false;
 //
-var seisOcho = false;
-var doceOcho = false;
+var ternariobo = false;
 //
 
 //audios y e inners
     var subdivision = document.getElementById('subdivision');
-	
-    
-	
 	var write3 = document.getElementById('inner3');
 	
 	var audio1 = document.getElementById('click1');
@@ -414,13 +464,13 @@ function AcentoPrimerOn(){
 	beatNegraAcento = beatNegra;
 	
 }
-//Conversion del tiempo de entrada a bpm
+
 	
+//Conversion del tiempo de entrada a bpm
 	tempoIn = document.getElementById('valorTempo').value;
 	
 	//Intervalos de tempo
-	
-	var tempoNegra = 60000/tempoIn;
+	var tempoNegra  = 60000/tempoIn;
 	var tempoCorchea= tempoNegra / 2;
 	var tempoSemiCorchea= tempoNegra / 4;
 	var tempoTresilloCorchea= tempoNegra / 3;
@@ -429,10 +479,6 @@ function AcentoPrimerOn(){
 	var tempoTresilloNegra= (tempoNegra * 2) / 3;
 	//*******************TERMINAR
 	//****************
-	
-	//Tiempo Delay
-	var tempoInicio = parseInt(tempoNegra) + parseInt(tempoCorchea);
-	
 	//Números de las subdivisiones
 	var negra = 4;
 	var corchea = -1;
@@ -443,16 +489,15 @@ function AcentoPrimerOn(){
 	var contraGalopa = -3;
 	var Sincopa = 4;
 	var Saltillo = -3;
-	var seis0cho = 2;
-	var Doce0cho = 4;
+	var Doce0cho;
 	
 function playNegras(){
 	
 	circles = document.getElementsByClassName('circle');
 	
 	StopMetronomo();
-	tempoIn = document.getElementById('valorTempo').value; 
-	//Intervalos de tempo
+	
+	tempoIn = document.getElementById('valorTempo').value;
 	tempoNegra = 60000/tempoIn;
 	negra = compas;
 	//Negras
@@ -625,28 +670,20 @@ function playNegras(){
      Galopabo = false;
      contraGalopabo = false;
 	 Sincopabo = false;
-	 Saltillobo = false;
-	 seisOcho = false;
-	 doceOcho = false;
+    Saltillobo = false;
+    ternariobo = false;
 }
 function playCorcheas(){
 	subdivision.innerHTML = 'Corcheas';
 	StopMetronomo();
 	//validar si se esta en binario o ternario
-	if (compasseisporOcho == true){
-		playseisoctavos();
-	}
-	else if(compasDoceporOcho == true){
-		playDoceoctavos();
+	if (compasseisporOcho == true || compasTresporOcho == true || compasNueveOcho == true || compasDoceporOcho == true){
+		playTernarios();
 	}
 	else{		
 	    playNegras();
-	}
-	var tempoIn = document.getElementById('valorTempo').value;
-	
-	//Intervalos de tempo
-	var tempoNegra = 60000/tempoIn;
-	var tempoCorchea= tempoNegra / 2;
+	}	tempoNegra = 60000/tempoIn;
+		tempoCorchea= tempoNegra / 2;
 	//Negras
 	
 	
@@ -676,19 +713,17 @@ function playCorcheas(){
      contraGalopabo = false;
 	 Sincopabo = false;
 	 Saltillobo = false;
-	 seisOcho = false;
-	 doceOcho = false;
+    ternariobo = false;
 }
 
 function playTresillos(){
 		subdivision.innerHTML = 'Tresillos de corcheas';
 	StopMetronomo();
 	playNegras();
-	var tempoIn = document.getElementById('valorTempo').value;
 	
-	//Intervalos de tempo
-	var tempoNegra = 60000/tempoIn;
-	var tempoTresilloCorchea= tempoNegra / 3;
+    tempoNegra = 60000/tempoIn;
+
+	tempoTresilloCorchea= tempoNegra / 3;
 	
 	//tresillos de corchea
 	setTimeout(function(){
@@ -717,28 +752,19 @@ function playTresillos(){
      contraGalopabo = false;
 	 Sincopabo = false;
 	 Saltillobo = false;
-	 seisOcho = false;
-	 doceOcho = false;
+    ternariobo = false;
 }
 function playsemiCorcheas(){
 		subdivision.innerHTML = 'Semicorcheas';
 	StopMetronomo();
-	
 	//validar si se esta en binario o ternario
-	if (compasseisporOcho == true){
-		playseisoctavos()
-	}
-	else if(compasDoceporOcho == true){
-		playDoceoctavos();
+	if (compasseisporOcho == true || compasTresporOcho == true || compasNueveOcho == true || compasDoceporOcho == true){
+		playTernarios();
 	}
 	else{		
 	    playNegras();
 	}
-	var tempoIn = document.getElementById('valorTempo').value;
-	
-	//Intervalos de tempo
-	var tempoNegra = 60000/tempoIn;
-	var tempoSemiCorchea= tempoNegra / 4;
+	tempoSemiCorchea= tempoNegra / 4;
 	
 	setTimeout(function(){
 	//Semicorcheas
@@ -772,21 +798,15 @@ function playsemiCorcheas(){
      contraGalopabo = false;
 	 Sincopabo = false;
 	 Saltillobo = false;
-	 seisOcho = false;
+    ternariobo = false;
 }
 function playtresilloNegra(){
 		subdivision.innerHTML = 'Tresillos de Negras';
 	StopMetronomo();
 	playNegras();
-	var tempoIn = document.getElementById('valorTempo').value;
 	
-	//Intervalos de tempo
-	var tempoNegra = 60000/tempoIn;
-	var tempoTresilloNegra= (tempoNegra * 2) / 3;
-	console.log('negra: ' + tempoNegra);
-	console.log('tresiilo: ' + tempoTresilloNegra);
+	tempoTresilloNegra= (tempoNegra * 2) / 3;
 	
-	var tresilloNegra = 3;
 	setTimeout(function(){
 		//tresillos de corchea
 	MetronomoTresilloNegra = setInterval(FuncionTresilloNegra, tempoTresilloNegra);
@@ -815,28 +835,16 @@ function playtresilloNegra(){
      contraGalopabo = false;
 	 Sincopabo = false;
 	 Saltillobo = false;
-	 seisOcho = false;
+    ternariobo = false;
 }
 function playGalopa(){ //el tiempo es el mismo que el de las semicorcheas, solo cambian los audios porque el segundo no se ejecuta
 	
 		subdivision.innerHTML = 'Galopas';
 	StopMetronomo();
+		
+	playNegras();
 	
-	//validar si se esta en binario o ternario
-	if (compasseisporOcho == true){
-		playseisoctavos()
-	}
-	else if(compasDoceporOcho == true){
-		playDoceoctavos();
-	}
-	else{		
-	    playNegras();
-	}
-	var tempoIn = document.getElementById('valorTempo').value;
-	
-	//Intervalos de tempo
-	var tempoNegra = 60000/tempoIn;
-	var tempoSemiCorchea= tempoNegra / 4;
+	tempoSemiCorchea= tempoNegra / 4;
 	
 			Galopa = 1;
 	
@@ -871,28 +879,13 @@ function playGalopa(){ //el tiempo es el mismo que el de las semicorcheas, solo 
      contraGalopabo = false;
 	 Sincopabo = false;
 	 Saltillobo = false;
-	 seisOcho = false;
-	 doceOcho = false;
+    ternariobo = false;
 }
 function playcontraGalopa(){
 		subdivision.innerHTML = 'Contra Galopas';
 	StopMetronomo();
-	
-	//validar si se esta en binario o ternario
-	if (compasseisporOcho == true){
-		playseisoctavos()
-	}
-	else if(compasDoceporOcho == true){
-		playDoceoctavos();
-	}
-	else{		
-	    playNegras();
-	}
-	var tempoIn = document.getElementById('valorTempo').value;
-	
-	//Intervalos de tempo
-	var tempoNegra = 60000/tempoIn;
-	var tempoSemiCorchea= tempoNegra / 4;
+
+	    playNegras();tempoSemiCorchea= tempoNegra / 4;
 	
 	setTimeout(function(){
 	//Semicorcheas
@@ -926,27 +919,12 @@ function playcontraGalopa(){
      contraGalopabo = true;
 	 Sincopabo = false;
 	 Saltillobo = false;
-	 seisOcho = false;
+    ternariobo = false;
 }
 function playSincopa(){
 		subdivision.innerHTML = 'Sincopas';
 	StopMetronomo();
-	
-	//validar si se esta en binario o ternario
-	if (compasseisporOcho == true){
-		playseisoctavos()
-	}
-	else if(compasDoceporOcho == true){
-		playDoceoctavos();
-	}
-	else{		
-	    playNegras();
-	}
-	var tempoIn = document.getElementById('valorTempo').value;
-	
-	//Intervalos de tempo
-	var tempoNegra = 60000/tempoIn;
-	var tempoSemiCorchea= tempoNegra / 4;
+	    playNegras();tempoSemiCorchea= tempoNegra / 4;
 	Sincopa = 1;
 	setTimeout(function(){
 	//Semicorcheas
@@ -980,28 +958,13 @@ function playSincopa(){
      contraGalopabo = false;
 	 Sincopabo = true;
 	 Saltillobo = false;
-	 seisOcho = false;
-	 doceOcho = false;
+    ternariobo = false;
 }
 function playSaltillo(){
 		subdivision.innerHTML = 'Saltillos';
-	StopMetronomo();
-	
-	//validar si se esta en binario o ternario
-	if (compasseisporOcho == true){
-		playseisoctavos()
-	}
-	else if(compasDoceporOcho == true){
-		playDoceoctavos();
-	}
-	else{		
+	StopMetronomo();		
 	    playNegras();
-	}
-	var tempoIn = document.getElementById('valorTempo').value;
-	
-	//Intervalos de tempo
-	var tempoNegra = 60000/tempoIn;
-	var tempoSemiCorchea= tempoNegra / 4;
+		tempoSemiCorchea= tempoNegra / 4;
 			Saltillo = 1;
 	
 	setTimeout(function(){
@@ -1035,111 +998,19 @@ function playSaltillo(){
      contraGalopabo = false;
 	 Sincopabo = false;
 	 Saltillobo = true;
-	 seisOcho = false;
-	 doceOcho = false;
+    ternariobo = false;
 } 
-//******** 6/ 8 ******
-function playseisoctavos(){
-	StopMetronomo();
-	var tempoIn = document.getElementById('valorTempo').value;
-	
-	//Intervalos de tempo
-	var tempoNegra = 60000/tempoIn;
-	var temposeisOctavos= (tempoNegra / 2) * 3;
-	console.log('negra: ' + tempoNegra);
-	console.log('tresiilo: ' + temposeisOctavos);
-	seis0cho = compas;
-	
-	
-		//tresillos de corchea
-	MetronomoSeisOctavos = setInterval(FuncionSeisOctavos, temposeisOctavos);
-	function FuncionSeisOctavos(){
-		if(seis0cho >= compas && red == false){
-			seis0cho = 1;
-			beatNegraAcento.play();
-		    for( i = 0; i < circles.length; i++){
-		    circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
-			circles[i].style.transform = 'scale(1)';
-			circles[0].style.background = '#b50000';
-			circles[0].style.transform = 'scale(2)';
-	        }
-		}
-		//******************
-		else if(seis0cho >= compas && red == true){
-			seis0cho = 1;
-			beatNegraAcento.play();
-		    for( i = 0; i < circles.length; i++){
-		    circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
-			circles[i].style.transform = 'scale(1)';
-			circles[0].style.background = '#b50000';
-			circles[0].style.transform = 'scale(2)';
-	        }
-						
-			//document.getElementById('circle1').style.background = '#ff0000';
-		}
-		//*******************************
-		else if(seis0cho == 1 && red == false){
-			seis0cho++;
-			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
-			   circles[i].style.transform = 'scale(1)';
-	        }
-			circles[1].style.background = '#ff0000';
-			circles[1].style.transform = 'scale(1.8)';
-			beatNegra.play();
-		}
-		else if(seis0cho == 1 && red == true){
-			seis0cho++;
-			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
-			   circles[i].style.transform = 'scale(1)';
-	        }
-			circles[1].style.background = '#ff0000';
-			circles[1].style.transform = 'scale(1.8)';
-			beatNegra.play();
-		}
-		else{
-			negra++;
-			for( var i = 0; i < circles.length; i++){
-		       circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
-			   circles[i].style.transform = 'scale(1)';
-	        }
-			circles[1].style.background = '#ff0000';
-			circles[1].style.transform = 'scale(1.8)';
-			beatNegra.play();
-		}
-		
-		
-	}
-	
-	negrabo = false;
-    corcheabo = false;
-    tresillobo = false;
-    semicorcheabo = false;
-	 TresilloNegrabo = false;
-     Galopabo = false;
-     contraGalopabo = false;
-	 Sincopabo = false;
-	 Saltillobo = false;
-	 seisOcho = true;
-	 doceOcho = false;
-}
 
-
-function playDoceoctavos(){
+function playTernarios(){
 	StopMetronomo();
-	var tempoIn = document.getElementById('valorTempo').value;
-	
-	//Intervalos de tempo
-	var tempoNegra = 60000/tempoIn;
-	var tempoDoceOctavos= (tempoNegra / 2) * 3;
-	console.log('negra: ' + tempoNegra);
-	console.log('tresiilo: ' + tempoDoceOctavos);
+	tempoIn = document.getElementById('valorTempo').value;
+	tempoNegra = 60000/tempoIn;
+	tempoTernario= (tempoNegra / 2) * 3;
 	Doce0cho = compas;
 	
 	
 		//tresillos de corchea
-	MetronomoDoceOctavos = setInterval(FuncionDoceOctavos, tempoDoceOctavos);
+	MetronomoTernario = setInterval(FuncionDoceOctavos, tempoTernario);
 	function FuncionDoceOctavos(){
 		if(Doce0cho >= compas && red == false){
 			Doce0cho = 1;
@@ -1255,8 +1126,7 @@ function playDoceoctavos(){
      contraGalopabo = false;
 	 Sincopabo = false;
 	 Saltillobo = false;
-	 seisOcho = false;
-	 doceOcho = true;
+     ternariobo = true;
 }
 /******** 12 / 8 ******/
 //detener todos los setInterval
@@ -1270,8 +1140,7 @@ function StopMetronomo(){
 	clearInterval(MetronomoContraGalopa);
 	clearInterval(MetronomoSincopa);
 	clearInterval(MetronomoSaltillo);
-	clearInterval(MetronomoSeisOctavos);
-	clearInterval(MetronomoDoceOctavos);
+	clearInterval(MetronomoTernario);
 	//para iniciarlas cada vez que se detenga la ejecución
 	negra = 4;
 	corchea = -1;
@@ -1295,9 +1164,6 @@ function playAll(){
 		tempoIn = newtempoRango;
         document.getElementById('valorTempo').value = newtempoRango;
 		document.getElementById('rangoTempo').value = newtempoRango;// inciamos el slider para que no se sobrepasen los 220 pbm
-		
-			console.log('es mayor');
-			console.log(tempoIn);
 	    }
 	
 	if(corcheabo == true){
@@ -1336,13 +1202,9 @@ function playAll(){
 	    subdivision.innerHTML = 'Negra';
 
 	}
-	else if (seisOcho == true) { 
-		playseisoctavos();	
-	    subdivision.innerHTML = 'Negra con puntillo';
-	}
-	else if (doceOcho == true) { 
-		playDoceoctavos();	
-	    subdivision.innerHTML = 'Negra con puntillo';
+	else if (ternariobo == true) { 
+		playTernarios();	
+	    subdivision.innerHTML = 'Corcheas';
 	}
 	else {
 	 document.getElementById('playporDefecto').click(); 	
