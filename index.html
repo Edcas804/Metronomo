@@ -84,7 +84,7 @@
 		-->
 		<div class="contenedorNotas">
 		    <div class="botonTabs" id="ternarioNegra" style="display: none" ><button type="button" value="1" onclick="playTernarios(); ocultarplay(); functionActive(event); subdivision.innerHTML = 'Negras con puntillo'" class="tabs" ><img class="tabsImg"src="Img/D2.jpg"><img class="tabsImg2"src="Img/R7.jpg"></button></div>
-		    <div class="botonTabs binario" ><button type="button" value="1" onclick="playNegras(); ocultarplay(); functionActive(event); subdivision.innerHTML = 'Negras'" class="tabs" id="playporDefecto">                              <img class="tabsImg"src="Img/D1.jpg"><img class="tabsImg2"src="Img/R1.jpg"></button></div>
+		    <div class="botonTabs binario" ><button type="button" value="1" onclick="playNegras(); ocultarplay(); functionActive(event); subdivision.innerHTML = 'Negras'" class="tabs" id="playporDefecto">                              <img class="tabsImg"src="Img/D1.jpg"><img class="tabsImg2 tbasN"src="Img/R1.jpg"></button></div>
 		    <div class="botonTabs ternario" style="display: none" ><button id="ternarioDefaultseis"type="button" value="1/2 tresillo"  onclick="playCorcheas();  ocultarplay(); functionActive(event)"class="tabs">                       <img class="tabsImg"src="Img/D5.jpg"><img class="tabsImg2"src="Img/R6.jpg"></button></div>
 		    <div class="botonTabs binario" ><button type="button" value="1/2"  onclick="playCorcheas();  ocultarplay(); functionActive(event)"class="tabs"> <img class="tabsImg"src="Img/D4.jpg"><img class="tabsImg2"src="Img/R8.jpg"></button></div>
 		    <div class="botonTabs binario" ><button type="button" value="3"  onclick="playTresillos(); ocultarplay(); functionActive(event)" class="tabs">  <img class="tabsImg"src="Img/D5.jpg"><img class="tabsImg2"src="Img/R6.jpg"><p class="texttresillos">3</p></button></div>
@@ -99,6 +99,9 @@
 		<!--Seleccionar compases posiciones absolutas-->
 		 <div class="contenedorElegirCompas" id="listaCompases">
 		    <p class="cerrarCompas" onclick="cerrarMenuCompas('listaCompases')">X</p>
+				<div class="botonTabs">
+				    <li onclick="compasUnCua()">1 / 4</li>
+				</div>
 				<div class="botonTabs">
 				    <li onclick="compasDosCua()">2 / 4</li>
 				</div>

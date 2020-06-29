@@ -192,6 +192,34 @@ var	compasTresporOcho = false;
 var compasseisporOcho = false
 var	compasNueveOcho = false;
 var compasDoceporOcho = false
+var compasUnCuatro = false; // en caso de elegir el compas 1/4 con este boleano se evaluara la funcion jsnotas()
+
+function compasUnCua(){
+	compas = 1;
+	document.getElementById('innerCompas').innerHTML = '1 / 4';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'none';
+	document.getElementById('circle3').style.display = 'none';
+	document.getElementById('circle4').style.display = 'none';
+	document.getElementById('circle5').style.display = 'none';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = true;
+	compasTresporOcho = false
+	compasseisporOcho = false;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	compasUnCuatro = true;
+
+	validarBinarioTernario();
+		StopMetronomo();
+	 document.getElementById('playporDefecto').click(); 	
+	
+}
 function compasDosCua(){
 	compas = 2;
 	document.getElementById('innerCompas').innerHTML = '2 / 4';
@@ -211,6 +239,7 @@ function compasDosCua(){
 	compasseisporOcho = false;
 	compasNueveOcho = false;
     compasDoceporOcho = false;
+	compasUnCuatro = false;
 	validarBinarioTernario();
 		StopMetronomo();
 	 document.getElementById('playporDefecto').click(); 	
@@ -234,6 +263,7 @@ function compasTresCua(){
 	compasseisporOcho = false;
 	compasNueveOcho = false;
     compasDoceporOcho = false;
+	compasUnCuatro = false;
 	validarBinarioTernario();
 		StopMetronomo();
 	 document.getElementById('playporDefecto').click(); 	
@@ -256,6 +286,7 @@ function compasCuatroCua(){
 	compasseisporOcho = false;
 	compasNueveOcho = false;
     compasDoceporOcho = false;
+	compasUnCuatro = false;
 	validarBinarioTernario();
 	 document.getElementById('playporDefecto').click(); 	
 }
@@ -277,6 +308,7 @@ function compasCincoCua(){
 	compasseisporOcho = false;
 	compasNueveOcho = false;
     compasDoceporOcho = false;
+	compasUnCuatro = false;
 	validarBinarioTernario();
 		StopMetronomo();
 	 document.getElementById('playporDefecto').click(); 	
@@ -299,6 +331,7 @@ function compasSeisCua(){
 	compasTresporOcho = false;
 	compasNueveOcho = false;
     compasDoceporOcho = false;
+	compasUnCuatro = false;
 	validarBinarioTernario();
 		StopMetronomo();
 	 document.getElementById('playporDefecto').click(); 	
@@ -321,6 +354,7 @@ function compasSieteCua(){
 	compasseisporOcho = false;
 	compasNueveOcho = false;
     compasDoceporOcho = false;
+	compasUnCuatro = false;
 	validarBinarioTernario();
 		StopMetronomo();
 	 document.getElementById('playporDefecto').click(); 	
@@ -343,6 +377,7 @@ function compasTresOcho(){
 	compasseisporOcho = false;
 	compasNueveOcho = false;
     compasDoceporOcho = false;
+	compasUnCuatro = false;
 	validarBinarioTernario();
 }
 function compasSeisOcho(){
@@ -363,6 +398,7 @@ function compasSeisOcho(){
 	compasseisporOcho = true;
 	compasNueveOcho = false;
     compasDoceporOcho = false;
+	compasUnCuatro = false;
 	validarBinarioTernario();
 }
 function compasNueveporOcho(){
@@ -383,6 +419,7 @@ function compasNueveporOcho(){
 	compasseisporOcho = false;
 	compasNueveOcho = true;
     compasDoceporOcho = false;
+	compasUnCuatro = false;
 	validarBinarioTernario();
 }
 function compasDoceOcho(){
@@ -403,6 +440,7 @@ function compasDoceOcho(){
 	compasseisporOcho = false;
 	compasNueveOcho = false;
     compasDoceporOcho = true;
+	compasUnCuatro = false;
 	validarBinarioTernario();
 }
 
@@ -449,21 +487,68 @@ var ternariobo = false;
 	const beat4 = new Audio("Audio/semicorchea2.wav");
 	const beat4a = new Audio("Audio/semicorchea2.wav");
 	const beat4b = new Audio("Audio/semicorchea2.wav");
-	
-	
-//Desactivar acento en el primer tiempo
+//FUNCTION PARA DETERMINAR LOS OSCILADORES DE LOS CLICKS	
+//FUNCTION PARA DETERMINAR LOS OSCILADORES DE LOS CLICKS	
+	var context = new AudioContext();
+	var beat1 = 880.0;
+	var beat2 = 440.0;
+	var beat3 = 784.0;
+	var acentoYes = false;
 function AcentoPrimerOff(){
 	document.getElementById('desactivar').style.display = 'none';
 	document.getElementById('activar').style.display = 'block';
-	beatNegraAcento = new Audio("Audio/negraA.wav");
+	acentoYes = false;
 	
 }
 function AcentoPrimerOn(){
 	document.getElementById('activar').style.display = 'none';
 	document.getElementById('desactivar').style.display = 'block';
-	beatNegraAcento = beatNegra;
-	
+	acentoYes = true;
 }
+function jsnotas(){
+	var o = context.createOscillator();
+	g = context.createGain();
+	o.connect(g);
+	o.type = "square"; //sine, square, sawtooth, triangle
+	g.connect(context.destination);
+	o.start(0);
+	if (acentoYes == true || compasTresporOcho == true || compasUnCuatro == true){
+	    o.frequency.value= beat2;
+		g.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.04);
+	    g.gain.value= 0.8;
+	}
+	else {
+	o.frequency.value= beat1;
+	g.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.09);
+	g.gain.value= 0.9;
+	}
+}
+function jsnotas2(){
+	var o = context.createOscillator();
+	g2 = context.createGain();
+	o.connect(g2);
+	o.type = "square"; //sine, square, sawtooth, triangle
+	o.frequency.value= beat2;
+	g2.connect(context.destination);
+	o.start(0);
+	g2.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.04);
+	g2.gain.value = 0.8;
+}
+function jsnotas3(){
+	var o = context.createOscillator();
+	g3 = context.createGain();
+	o.connect(g3);
+	o.type = "square"; //sine, square, sawtooth, triangle
+	o.frequency.value= beat3;
+	g3.connect(context.destination);
+	o.start(0);
+	g3.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.02);
+	g3.gain.value= 0.1;
+}
+//FUNCTION PARA DETERMINAR LOS OSCILADORES DE LOS CLICKS	
+//FUNCTION PARA DETERMINAR LOS OSCILADORES DE LOS CLICKS	
+//Desactivar acento en el primer tiempo
+
 
 	
 //Conversion del tiempo de entrada a bpm
@@ -507,7 +592,7 @@ function playNegras(){
 	
 		if(negra >= compas && red == false){
 			negra = 1;
-			beatNegraAcento.play();
+			jsnotas();
 		    for( i = 0; i < circles.length; i++){
 		    circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
 			circles[i].style.transform = 'scale(1)';
@@ -518,7 +603,7 @@ function playNegras(){
 		//******************
 		else if(negra >= compas && red == true){
 			negra = 1;
-			beatNegraAcento.play();
+			jsnotas();
 		    for( i = 0; i < circles.length; i++){
 		    circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
 			circles[i].style.transform = 'scale(1)';
@@ -537,7 +622,7 @@ function playNegras(){
 	        }
 			circles[1].style.background = '#ff0000';
 			circles[1].style.transform = 'scale(1.8)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(negra == 1 && red == true){
 			negra++;
@@ -547,7 +632,7 @@ function playNegras(){
 	        }
 			circles[1].style.background = '#ff0000';
 			circles[1].style.transform = 'scale(1.8)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(negra == 2 && red == false){
 			negra++;
@@ -557,7 +642,7 @@ function playNegras(){
 	        }
 			circles[2].style.background = '#dd0000';
 			circles[2].style.transform = 'scale(1.6)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(negra == 2 && red == true){
 			negra++;
@@ -567,7 +652,7 @@ function playNegras(){
 	        }
 			circles[2].style.background = '#dd0000';
 			circles[2].style.transform = 'scale(1.6)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(negra == 3 && red == false){
 			negra++;
@@ -577,7 +662,7 @@ function playNegras(){
 	        }
 			circles[3].style.background = '#cc0000';
 			circles[3].style.transform = 'scale(1.4)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(negra == 3 && red == true){
 			negra++;
@@ -587,7 +672,7 @@ function playNegras(){
 	        }
 			circles[3].style.background = '#cc0000';
 			circles[3].style.transform = 'scale(1.4)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(negra == 4 && red == false){
 			negra++;
@@ -597,7 +682,7 @@ function playNegras(){
 	        }
 			circles[4].style.background = '#bb0000';
 			circles[4].style.transform = 'scale(1.2)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(negra == 4 && red == true){
 			negra++;
@@ -607,7 +692,7 @@ function playNegras(){
 	        }
 			circles[4].style.background = '#bb0000';
 			circles[4].style.transform = 'scale(1.2)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(negra == 5 && red == false){
 			negra++;
@@ -617,7 +702,7 @@ function playNegras(){
 	        }
 			circles[5].style.background = '#aa0000';
 			circles[5].style.transform = 'scale(1)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(negra == 5 && red == true){
 			negra++;
@@ -627,7 +712,7 @@ function playNegras(){
 	        }
 			circles[5].style.background = '#aa0000';
 			circles[5].style.transform = 'scale(1)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(negra == 6 && red == false){
 			negra++;
@@ -637,7 +722,7 @@ function playNegras(){
 	        }
 			circles[6].style.background = '#800000';
 			circles[6].style.transform = 'scale(0.8)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(negra == 6 && red == true){
 			negra++;
@@ -647,7 +732,7 @@ function playNegras(){
 	        }
 			circles[6].style.background = '#800000';
 			circles[6].style.transform = 'scale(0.8)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else{
 			negra++;
@@ -657,7 +742,7 @@ function playNegras(){
 	        }
 			circles[3].style.background = '#600000';
 			circles[3].style.transform = 'scale(0.6)';
-			beatNegra.play();
+			jsnotas2();
 			
 			//document.getElementById('circle1').style.background = '#b5b5b5';
 		}
@@ -693,11 +778,11 @@ function playCorcheas(){
 	function FuncionCorchea(){
 		if(corchea >= 2){
 			corchea = 1;
-			beat4a.play();
+			jsnotas3();
 		}
 		else{
 			corchea++;
-			beat4a.play();
+			jsnotas3();
 		}
 	}	
 	}, tempoNegra)
@@ -731,15 +816,15 @@ function playTresillos(){
 	function FuncionTresillosCorchea(){
 		if(tresillocorchea >= 3){
 			tresillocorchea = 1;
-			beat4.play();
+			jsnotas3();
 		}
 		else if(tresillocorchea == 1){
 			tresillocorchea++;
-			beat4a.play();
+			jsnotas3();
 		}
 		else{
 			tresillocorchea++;
-			beat4b.play();
+			jsnotas3();
 		}
 	}
 	}, tempoNegra);
@@ -772,20 +857,20 @@ function playsemiCorcheas(){
 	function FuncionSemiCorchea(){
 		if(semicorchea == 4){
 			semicorchea = 1;
-			beat4a.play();
+			jsnotas3();
 		}
 		else if(semicorchea == 1){
 			semicorchea++;
-			beat4.play();
+			jsnotas3();
 			
 		}
 		else if(semicorchea == 2){
 			semicorchea++;
-			beat4a.play();
+			jsnotas3();
 		}
 		else {
 			semicorchea++;
-			beat4b.play();
+			jsnotas3();
 		}
 	}
 	}, tempoNegra);
@@ -813,15 +898,15 @@ function playtresilloNegra(){
 	function FuncionTresilloNegra(){
 		if(tresilloNegra >= 3){
 			tresilloNegra = 1;
-			beat4.play();
+			jsnotas3();
 		}
 		else if(tresilloNegra == 1){
 			tresilloNegra++;
-			beat4a.play();
+			jsnotas3();
 		}
 		else{
 			tresilloNegra++;
-			beat4b.play();
+			jsnotas3();
 		}
 	}
 	}, tempoNegra)
@@ -854,7 +939,7 @@ function playGalopa(){ //el tiempo es el mismo que el de las semicorcheas, solo 
 	function FuncionGalopa(){
 		if(Galopa == 4){
 			Galopa = 1;
-			beat4a.play();
+			jsnotas3();
 		}
 		else if(Galopa == 1){
 			Galopa++;
@@ -862,11 +947,11 @@ function playGalopa(){ //el tiempo es el mismo que el de las semicorcheas, solo 
 		}
 		else if(Galopa == 2){
 			Galopa++;
-			beat4a.play();
+			jsnotas3();
 		}
 		else {
 			Galopa++;
-			beat4b.play();
+			jsnotas3();
 		}
 	}
 	}, tempoNegra);
@@ -893,16 +978,15 @@ function playcontraGalopa(){
 	function FuncionContraGalopa(){
 		if(contraGalopa == 4){
 			contraGalopa = 1;
-			beat4a.play();
+			jsnotas3();
 		}
 		else if(contraGalopa == 1){
 			contraGalopa++;
-			beat4b.play();
+			jsnotas3();
 		}
 		else if(contraGalopa == 2){
 			contraGalopa++;
-			beat4.play();
-			//No lleva audio para crear el efecto galopa
+			jsnotas3();
 		}
 		else {
 			contraGalopa++;
@@ -933,11 +1017,11 @@ function playSincopa(){
 		
 		if(Sincopa == 4){
 			Sincopa = 1;
-			beat4a.play();
+			jsnotas3();
 		}
 		else if(Sincopa == 1){
 			Sincopa++;
-			beat4b.play();
+			jsnotas3();
 		}
 		else if(Sincopa == 2){
 			Sincopa++;
@@ -945,7 +1029,7 @@ function playSincopa(){
 		}
 		else {
 			Sincopa++;
-			beat4.play();
+			jsnotas3();
 		}
 	}
 	}, tempoNegra);
@@ -973,7 +1057,7 @@ function playSaltillo(){
 	function FuncionSaltillo(){
 		if(Saltillo == 4){
 			Saltillo = 1;
-			beat4a.play();
+			jsnotas3();
 		}
 		else if(Saltillo == 1){
 			Saltillo++;
@@ -985,7 +1069,7 @@ function playSaltillo(){
 		}
 		else {
 			Saltillo++;
-			beat4.play();
+			jsnotas3();
 		}
 	}
 	}, tempoNegra);
@@ -1014,7 +1098,7 @@ function playTernarios(){
 	function FuncionDoceOctavos(){
 		if(Doce0cho >= compas && red == false){
 			Doce0cho = 1;
-			beatNegraAcento.play();
+			jsnotas();
 		    for( i = 0; i < circles.length; i++){
 		    circles[i].style.background = 'linear-gradient(to bottom, #151515, #252525)';
 			circles[i].style.transform = 'scale(1)';
@@ -1025,7 +1109,7 @@ function playTernarios(){
 		//******************
 		else if(Doce0cho >= compas && red == true){
 			Doce0cho = 1;
-			beatNegraAcento.play();
+			jsnotas();
 		    for( i = 0; i < circles.length; i++){
 		    circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
 			circles[i].style.transform = 'scale(1)';
@@ -1044,24 +1128,22 @@ function playTernarios(){
 	        }
 			circles[1].style.background = '#ff0000';
 			circles[1].style.transform = 'scale(1.8)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		
 		//
 		//******************
 		else if(Doce0cho >= 1 && red == true){
 			Doce0cho++;
-			beatNegra.play();
+			jsnotas2();
 		    for( i = 0; i < circles.length; i++){
 		    circles[i].style.background = 'linear-gradient(to bottom, #250000, #350000)';
 			circles[i].style.transform = 'scale(1)';
 			
 	        }
 			circles[1].style.background = '#b50000';
-			circles[1].style.transform = 'scale(1.8)';			
-			//document.getElementById('circle1').style.background = '#ff0000';
+			circles[1].style.transform = 'scale(1.8)';		
 		}
-		//*******************************
 		else if(Doce0cho == 2 && red == false){
 			Doce0cho++;
 			for( i = 0; i < circles.length; i++){
@@ -1070,7 +1152,7 @@ function playTernarios(){
 	        }
 			circles[2].style.background = '#ff0000';
 			circles[2].style.transform = 'scale(1.6)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(Doce0cho == 2 && red == true){
 			Doce0cho++;
@@ -1080,7 +1162,7 @@ function playTernarios(){
 	        }
 			circles[2].style.background = '#ff0000';
 			circles[2].style.transform = 'scale(1.6)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		//*******************************
 		else if(Doce0cho == 3 && red == false){
@@ -1091,7 +1173,7 @@ function playTernarios(){
 	        }
 			circles[3].style.background = '#ff0000';
 			circles[3].style.transform = 'scale(1.4)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else if(Doce0cho == 3 && red == true){
 			Doce0cho++;
@@ -1101,7 +1183,7 @@ function playTernarios(){
 	        }
 			circles[3].style.background = '#ff0000';
 			circles[3].style.transform = 'scale(1.4)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		else{
 			Doce0cho++;
@@ -1111,7 +1193,7 @@ function playTernarios(){
 	        }
 			circles[0].style.background = '#ff0000';
 			circles[0].style.transform = 'scale(1.2)';
-			beatNegra.play();
+			jsnotas2();
 		}
 		
 		
