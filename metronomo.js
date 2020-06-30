@@ -71,6 +71,17 @@ function abrirMenuCompas(ventana){
 	document.getElementById(ventana).style.visibility = 'visible';
 	document.getElementById('ajustesLogo').style.transform = 'rotate(360deg)';
 }
+function abrirMenuMix(ventana){
+	document.getElementById(ventana).style.visibility = 'visible';
+	document.getElementById(ventana).style.opacity = '1';
+	document.getElementById('ajustesLogo').style.transform = 'rotate(360deg)';
+}
+function CerrarMenuMix(ventana){
+	//document.getElementById(ventana).style.width = '70%';
+	document.getElementById(ventana).style.visibility = 'hidden';
+	document.getElementById(ventana).style.opacity = '0';
+	document.getElementById('ajustesLogo').style.transform = 'rotate(0deg)';
+}
 
 // mostrar play stop
 function mostrarplay(){
@@ -494,6 +505,14 @@ var ternariobo = false;
 	var beat2 = 440.0;
 	var beat3 = 784.0;
 	var acentoYes = false;
+var freq1;
+var freq2;
+var freq3;
+function mostrarValorFrecuencia1(){
+	freq1 = document.getElementById('rangoFrecuencia1').value;
+	    document.getElementById('valorFrecuencia').innerHTML = freq1;
+	
+}
 function AcentoPrimerOff(){
 	document.getElementById('desactivar').style.display = 'none';
 	document.getElementById('activar').style.display = 'block';
@@ -505,11 +524,142 @@ function AcentoPrimerOn(){
 	document.getElementById('desactivar').style.display = 'block';
 	acentoYes = true;
 }
+
+//tipos de onda
+
+var sinebo1 = false;
+var squarebo1 = false;
+var sawtooth1 = false;
+var triangle1 = false;
+var sinebo2 = false;
+var squarebo2 = false;
+var sawtooth2 = false;
+var triangle2 = false;
+var sinebo3 = false;
+var squarebo3 = false;
+var sawtooth3 = false;
+var triangle3 = false;
+function waveTypeuser(wave){
+		sinebo3 = false;
+        squarebo3 = false;
+        sawtooth3 = false;
+        triangle3 = false;
+		if(wave === 'sineboun'){
+			sinebo3 = true;
+			console.log(sinebo3)
+		}else if(wave === 'squareun'){
+            squarebo3 = true;			
+		}else if(wave === 'sawtoothun'){
+            sawtooth3 = true;			
+		}else if(wave === 'triangleun'){
+            triangle3 = true;			
+		}
+		else{
+            squarebo3 = true;					
+		}
+	}
+
+function waveTypeuser2(wave){
+        sinebo2 = false;
+        squarebo2 = false;
+        sawtooth2 = false;
+        triangle2 = false;
+		//dos
+		if(wave === 'sineboDos'){
+            sinebo2 = true;			
+		}else if(wave === 'squareDos'){
+            squarebo2 = true;			
+		}else if(wave === 'sawtoothDos'){
+            sawtooth2 = true;			
+		}else if(wave === 'triangleDos'){
+            triangle2 = true;			
+		}
+		else{
+            squarebo2 = true;					
+		}
+	}
+function waveTypeuser3(wave){
+        sinebo1 = false;
+        squarebo1 = false;
+        sawtooth1 = false;
+        triangle1 = false;
+		//dos
+		if(wave === 'sineboTres'){
+            sinebo1 = true;			
+		}else if(wave === 'squareTres'){
+            squarebo1 = true;			
+		}else if(wave === 'sawtoothTres'){
+            sawtooth1 = true;			
+		}else if(wave === 'triangleTres'){
+            triangle1 = true;			
+		}
+		else{
+            squarebo1 = true;					
+		}
+	}
+//faders y niveles
+var gain1;
+var gain2;
+var gain3;
+function mostrarValor1(){
+	gain1 = document.getElementById('rangobeat1').value;
+	    document.getElementById('valorbeat1').innerHTML = gain1;
+}
+function mostrarValor2(){
+	gain2 = document.getElementById('rangobeat2').value;
+	    document.getElementById('valorbeat2').innerHTML = gain2;
+}
+function mostrarValor3(){
+	gain3 = document.getElementById('rangobeat3').value;
+	    document.getElementById('valorbeat3').innerHTML = gain3;
+}
+
+
 function jsnotas(){
+	var waveType;
+	if(sinebo1 == true){
+		waveType = "sine";
+	}
+	else if(squarebo1==true){
+		waveType = "square";
+	}
+	else if(sawtooth1==true){
+		waveType = "sawtooth";
+	}
+	else if(triangle1==true){
+		waveType = "triangle";
+	}
+	else{
+	waveType = "square";
+	}
+	//*************************
+	//*******************************
+	gain1Origin1 = document.getElementById('rangobeat1').value;
+	gain1 = document.getElementById('rangobeat1').value/100;
+	
+	var indicador1 = document.getElementById('indicador1');
+	    indicador1.style.height = gain1Origin1+'%';
+	
+	var num = gain1Origin1;
+	var Interval1 = setInterval(nivel1, 3);
+	    function nivel1(){
+			if(num <= 1){
+				clearInterval(Interval1);
+			}
+			else{
+				num--;
+	            indicador1.style.height = num+'%';
+				
+			}
+		}
+	
+	freq1 = document.getElementById('rangoFrecuencia1').value;
+	frecuencia1 = freq1;
+	//oscilador
 	var o = context.createOscillator();
 	g = context.createGain();
 	o.connect(g);
-	o.type = "square"; //sine, square, sawtooth, triangle
+	o.type = waveType; //sine, square, sawtooth, triangle
 	g.connect(context.destination);
 	o.start(0);
 	if (acentoYes == true || compasTresporOcho == true || compasUnCuatro == true){
@@ -518,32 +668,109 @@ function jsnotas(){
 	    g.gain.value= 0.8;
 	}
 	else {
-	o.frequency.value= beat1;
+	o.frequency.value= frecuencia1;
 	g.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.09);
-	g.gain.value= 0.9;
+	g.gain.value= gain1;
 	}
 }
 function jsnotas2(){
+	var waveType;
+	if(sinebo2 == true){
+		waveType = "sine";
+	}
+	else if(squarebo2==true){
+		waveType = "square";
+	}
+	else if(sawtooth2==true){
+		waveType = "sawtooth";
+	}
+	else if(triangle2==true){
+		waveType = "triangle";
+	}
+	else{
+	waveType = "square";
+	}
+	//*************************
+	
+	
+	gain1Origin2 = document.getElementById('rangobeat2').value;
+	gain2 = document.getElementById('rangobeat2').value/100;
+	
+	var indicador2 = document.getElementById('indicador2');
+	    indicador2.style.height = gain1Origin2+'%';
+	
+	var num = gain1Origin2;
+	var Interval2 = setInterval(nivel2, 2);
+	    function nivel2(){
+			if(num <= 1){
+				clearInterval(Interval2);
+			}
+			else{
+				num--;
+	            indicador2.style.height = num+'%';
+				
+			}
+		}
+	
+	//oscilador
 	var o = context.createOscillator();
 	g2 = context.createGain();
 	o.connect(g2);
-	o.type = "square"; //sine, square, sawtooth, triangle
+	o.type = waveType; //sine, square, sawtooth, triangle
 	o.frequency.value= beat2;
 	g2.connect(context.destination);
 	o.start(0);
 	g2.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.04);
-	g2.gain.value = 0.8;
+	g2.gain.value = gain2;
 }
 function jsnotas3(){
+	var waveType;
+	if(sinebo3 == true){
+		waveType = "sine";
+	}
+	else if(squarebo3==true){
+		waveType = "square";
+	}
+	else if(sawtooth3==true){
+		waveType = "sawtooth";
+	}
+	else if(triangle3==true){
+		waveType = "triangle";
+	}
+	else{
+	waveType = "square";
+	}
+	//*************************
+	gain1Origin3 = document.getElementById('rangobeat3').value;
+	gain3 = document.getElementById('rangobeat3').value/100;
+	
+	var indicador3 = document.getElementById('indicador3');
+	    indicador3.style.height = gain1Origin3+'%';
+	
+	var num = gain1Origin3;
+	var Interval3 = setInterval(nivel3, 1);
+	    function nivel3(){
+			if(num <= gain1Origin3/2){
+				clearInterval(Interval3);
+	            indicador3.style.height = '0%';
+			}
+			else{
+				num--;
+	            indicador3.style.height = num+'%';
+				
+			}
+		}
+	
+	//oscilador
 	var o = context.createOscillator();
 	g3 = context.createGain();
 	o.connect(g3);
-	o.type = "square"; //sine, square, sawtooth, triangle
+	o.type = waveType; //sine, square, sawtooth, triangle
 	o.frequency.value= beat3;
 	g3.connect(context.destination);
 	o.start(0);
 	g3.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.02);
-	g3.gain.value= 0.1;
+	g3.gain.value= gain3;
 }
 //FUNCTION PARA DETERMINAR LOS OSCILADORES DE LOS CLICKS	
 //FUNCTION PARA DETERMINAR LOS OSCILADORES DE LOS CLICKS	
@@ -1330,3 +1557,35 @@ function playAll(){
 	    
 	
 }
+//botones tipo de onda active
+function activebutton(evt){
+	var i;
+	var botonactive = document.getElementsByClassName('imgwave');
+	for(i = 0; i < botonactive.length; i++){
+		botonactive[i].className = botonactive[i].className.replace ( 'activeimgwave', '');
+	}
+	
+		evt.currentTarget.className += ' activeimgwave';	
+}
+
+function activebutton2(evt){
+	var i;
+	var botonactive = document.getElementsByClassName('imgwave2');
+	for(i = 0; i < botonactive.length; i++){
+		botonactive[i].className = botonactive[i].className.replace ( 'activeimgwave2', '');
+	}
+	
+		evt.currentTarget.className += ' activeimgwave2';	
+}
+function activebutton3(evt){
+	var i;
+	var botonactive = document.getElementsByClassName('imgwave3');
+	for(i = 0; i < botonactive.length; i++){
+		botonactive[i].className = botonactive[i].className.replace ( 'activeimgwave3', '');
+	}
+	
+		evt.currentTarget.className += ' activeimgwave3';	
+}
+		document.getElementById('clickdefaul1').click();
+		document.getElementById('clickdefaul2').click();
+		document.getElementById('clickdefaul3').click();

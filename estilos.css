@@ -21,6 +21,7 @@ body {
 	--main-backgroundfader: #606060	;
 	--main-backgroundAjustesCompas: rgba(10, 10, 10, 0.9);
 	--main-backgroundhs: #151515;
+	--main-box-shadow: 0px 0px 15px #000;
 }
  /*	
 	--main-backgroundbotones: #300000;
@@ -97,7 +98,7 @@ body {
 .tituloconfig {
 	width: 100%;
 	text-align: center;
-	background: var(--main-backgroundhs);
+	background: var(--main-background-color);
 	border-bottom: var(--main-borderbotones);
 	color: var(--main-color);
 	margin-bottom: 5px;
@@ -131,7 +132,6 @@ body {
 .switch {
 	width: 32px;
 	height: 32px;
-	background: var(--main-backgroundAjustesCompas);
 }
 .beatsUsuario {
 	border: none;
@@ -151,11 +151,12 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background: var(--main-backgroundAjustesCompas);
+	background: var(--main-backgroundprincipal);
 	visibility: hidden; 
 	height: 100%;
 	z-index: 2;
 	border: var(--main-borderbotones);
+	box-shadow: var(--main-box-shadow);
 	transition: 1s;
 	overflow: auto;
 }
@@ -206,13 +207,18 @@ body {
 .contenedorElegirCompas::-webkit-scrollbar-track {
 }
 /***+++++++++++++++++++++++++++++*/
-.cerrarCompas {
+.cerrarCompas, .cerrarCompas2 {
+	background: var(--main-backgroundprincipal);
 	color: var(--main-color);
 	position: relative;
-	padding: 20px 0px 20px 0px;
+	padding: 5px;
+	border-radius: 8px;
 	cursor: pointer;
+	border: var(--main-borderbotones);
 }
-
+.cerrarCompas:hover, .cerrarCompas2:hover{
+	transform: scale(0.95);
+}
 .contenedorTempo {
 	display: flex;
 	justify-content: center;
@@ -234,12 +240,17 @@ body {
 	width: 50%;
 	padding: 0px 0px 15px 0px;
 }
-.botonTabs, .contenedorRango, .contenedorSelectRango{
+.botonTabs, .botonTabs2, .contenedorRango, .contenedorSelectRango{
 	background: var(--main-background-color);
 	border-radius: 15px;
 	margin: 2px;
 	padding: 4px;
  }
+.botonTabs2 {
+	position: absolute;
+	top: -20;
+	right: -20;
+}
 .contenedorRango {
 	margin-bottom: 15px; 
 	margin-top: 15px;
@@ -418,27 +429,147 @@ body {
 }
 .ocultar{
 	display: none;
-}
-.decoracion1, .decoracion2, .decoracion3, .decoracion4 {
+}	
+/*seccion faders y medidores*/
+.contenedorfaders {
 	position: absolute;
-	width: 10px;
-	height: 10px;
-	background: var(--main-backgroundhs);
+	bottom: 0;
+	background: var(--main-backgroundprincipal);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	box-shadow: var(--main-box-shadow);
+	border-radius: 12px 12px 0px 0px;
+	visibility: hidden;
+	opacity: 0;
+	transition: 1s;
+}
+.contfaders {
+	position: reñative;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+	background: var(--main-background-color);
+	height: 100%;	
+	margin: 3px;
+	padding: 5px;
+	border-radius: 12px;
+}
+.contfaderstado {
+	display: flex;
+	justify-content: center;
+}
+
+.faders, .faders2{
+	-webkit-appearance: none;
+	transform: rotate(-90deg);
+	height: 5px;
+	width: 150px;
+	margin: 78 0 0 -60;
+	background: #101010;
+	border-radius: 8px;
+	border: none;
+	outline: none;
+}
+.faders2 {
+	margin: 78 0 0 0;	
+}
+.faders::-webkit-slider-thumb, .faders2::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 30px;
+	height: 15px;
+	background: linear-gradient(to left, #101010, #252525, #101010, #252525, #101010);
+}	
+.estado {
+	position: relative;
+	width: 6px;
+	height: 150px;
+	margin: 5 10 0 -60;
+	background: var(--main-backgroundprincipal);
+	border-radius: 8px;
+}
+#indicador1, #indicador2, #indicador3{
+	position: absolute;
+	bottom: 0;
+	width: 6px;
+	height: 0%;
+	background: linear-gradient(to top, #00ff00, #00ff00, #ffff00, #ffff00, #ff0000);
+	border-radius: 8px;
+}
+.valoresfaders {
+	color: #404040;
+}
+/*selecionar tipo de onda*/
+.conttipoOnda {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+#conttipoOnda1 {
+	position: ralative;
+}
+.contFrecuencia {
+	position: absolute;
+	left: -10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items:center;
+	background: var(--main-backgroundprincipal);
+	box-shadow: var(--main-box-shadow);
+	z-index: 5;
+	height: 180px;
+	width: 35px;
+	box-shadow: var(--main-box-shadow);
+	border-radius: 12px;
+	visibility: hidden;
+	opacity: 0;
+	transition: 1s;
+	
+}
+.wavebutton {
+	border: none;
+	outline: none;
+	background: var(--main-background-color);
+	padding: 2px;
+	border-radius: 5px;
+	margin-bottom: 3px;
+}
+.imgwave, .imgwave2, .imgwave3, .imgwavefreq {
+	width: 16px;
+	height: 16px;
+	background: var(--main-background);
+	border: var(--main-borderbotones);
+	border-style: outset;
+	border-radius: 5px;
+	filter: grayscale(100%);
+}
+
+.imgwave:hover, .imgwave2:hover, .imgwave3:hover, .imgwavefreq:hover{
+	transform: scale(0.95);
+}
+.imgwavefreq {
+	filter: grayscale(100%) ;
 	border-radius: 50%;
 }
-.decoracion1 {
-	top: 5px;
-	left: 5px;
+.imgwavefreq:hover {
+	filter: grayscale(0%);
 }
-.decoracion2 {
-	top: 5px;
-	right: 5px;
+.activeimgwave, .activeimgwave2, .activeimgwave3{
+	transform: scale(0.8);
+	border-style: inset;
+	filter: grayscale(100%) sepia(100%) hue-rotate(90deg);
+	box-shadow: none;
 }
-.decoracion3 {
-	bottom: 5px;
-	right: 5px;
+.activeimgwave{
+	transform: scale(0.8);
+	border-style: inset;
+	filter: grayscale(100%) sepia(100%) hue-rotate(90deg);
+	box-shadow: none;
 }
-.decoracion4 {
-	bottom: 5px;
-	left: 5px;
+.imgMixer {
+	width: 20px;
+	height: 20px;
 }
