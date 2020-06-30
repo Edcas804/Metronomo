@@ -77,8 +77,8 @@
 		    <div class="botonTabs binario" ><button type="button" value="3"  onclick="playTresillos(); ocultarplay(); functionActive(event)" class="tabs">  <img class="tabsImg"src="Img/D5.jpg"><img class="tabsImg2"src="Img/R6.jpg"><p class="texttresillos">3</p></button></div>
 		    <div class="botonTabs" > <button type="button" value="4" onclick="playsemiCorcheas(); ocultarplay(); functionActive(event)" class="tabs">       <img class="tabsImg"src="Img/D8.jpg"><img class="tabsImg2"src="Img/R9.jpg"></button></div>
 		    <div class="botonTabs binario" > <button type="button" value="tresilloNegra" onclick="playtresilloNegra(); ocultarplay(); functionActive(event)" class="tabs">&#9833;&#9833;&#9833;<p class="texttresillos">3</p></button></div>
-	        <div class="botonTabs binario" ><button type="button" value="Galopa" onclick="playGalopa(); ocultarplay(); functionActive(event)" class="tabs"> <img class="tabsImg"src="Img/D6.jpg"><img class="tabsImg2"src="Img/R5.jpg"></button></div>
-		    <div class="botonTabs binario" > <button type="button" value="contraGalopa" onclick="playcontraGalopa(); ocultarplay(); functionActive(event)" class="tabs"><img class="tabsImg"src="Img/D7.jpg"><img class="tabsImg2"src="Img/R4.jpg"></button></div>
+	        <div class="botonTabs binario" ><button type="button" value="Galopa" onclick="playGalopa(); ocultarplay(); functionActive(event)" class="tabs"> <img class="tabsImg"src="Img/D6.jpg"><img class="tabsImg2"src="Img/R4.jpg"></button></div>
+		    <div class="botonTabs binario" > <button type="button" value="contraGalopa" onclick="playcontraGalopa(); ocultarplay(); functionActive(event)" class="tabs"><img class="tabsImg"src="Img/D7.jpg"><img class="tabsImg2"src="Img/R5.jpg"></button></div>
 		    <div class="botonTabs binario" > <button type="button" value="Sincopa" onclick="playSincopa(); ocultarplay(); functionActive(event)" class="tabs"><img class="tabsImg"src="Img/D10.jpg"><img class="tabsImg2"src="Img/R3.jpg"></button></div>
 		    <div class="botonTabs binario" > <button type="button" value="saltillo" onclick="playSaltillo(); ocultarplay(); functionActive(event)" class="tabs"><img class="tabsImg"src="Img/D9.jpg"><img class="tabsImg2"src="Img/R2.jpg"></button></div>
 		</div>
@@ -175,8 +175,8 @@
 		</div>
 		<!--seccion faders y tipos de onda-->
 		<div class="contenedorfaders" id="seccionfader" >
-		    <div class="botonTabs2">
-		        <p class="cerrarCompas2" onclick="CerrarMenuMix('seccionfader')">X</p>
+		    <div class="botonTabs3">
+		        <p class="cerrarCompas3" onclick="CerrarMenuMix('seccionfader')">X</p>
 		    </div>
 			<div class="contfaders">
 			    <p  class="valoresfaders">Beat 1</p>
@@ -193,7 +193,7 @@
 		                   <p class="cerrarCompas2" onclick="CerrarMenuMix('contFrecuencia1')">X</p>
 		                </div>
 			            <input type="range" value="880" oninput="mostrarValorFrecuencia1()" id="rangoFrecuencia1"class="faders2"min="100" max="1500">				
-			            <p class="valoresfaders" id="valorFrecuencia">880</p>
+			            <p class="valoresfaders" ><span id="valorFrecuencia">880</span><br>Hz</p>
 		            </div>
 				<!--slider para elegir frecuancia en pos absoluta-->
 				</div>
@@ -208,13 +208,22 @@
 		    <div class="contfaders">
 			    <p  class="valoresfaders">Beat 2</p>
 		        <div class="contfaderstado">
-				<div class="conttipoOnda"> 
-		            <button class="wavebutton" id="frecuenciaUser" value="440" onclick=""><img onclick="" class="imgwavefreq"src="Img/freq.png"></button>
+				<div class="conttipoOnda" id="conttipoOnda2"> 
+		            <button class="wavebutton" id="frecuenciaUser2" value="440" onclick="abrirMenuMix('contFrecuencia2')"><img onclick="" class="imgwavefreq"src="Img/freq.png"></button>
 		            <button class="wavebutton" id="sine" value="sine" onclick="waveTypeuser2('sineboDos')"><img onclick="activebutton2(event)" class="imgwave2"src="Img/sine.png"></button>
 		            <button class="wavebutton" id="square" value="square" onclick="waveTypeuser2('squareDos')"><img onclick="activebutton2(event)" class="imgwave2"src="Img/square.png" id="clickdefaul2"></button>
 		            <button class="wavebutton" id="sawtooth" value="sawtooth" onclick="waveTypeuser2('sawtoothDos')"><img onclick="activebutton2(event)" class="imgwave2"src="Img/sawtooth.png"></button>
 		            <button class="wavebutton" id="triangle" value="triangle" onclick="waveTypeuser2('triangleDos')"><img onclick="activebutton2(event)" class="imgwave2"src="Img/triangle.png"></button>
-		     	</div>
+		     	<!--slider para elegir frecuancia en pos absoluta-->
+				    <div class="contFrecuencia" id="contFrecuencia2">
+		                <div class="botonTabs2">
+		                   <p class="cerrarCompas2" onclick="CerrarMenuMix('contFrecuencia2')">X</p>
+		                </div>
+			            <input type="range" value="440" oninput="mostrarValorFrecuencia2()" id="rangoFrecuencia2"class="faders2"min="100" max="1500">
+						<p class="valoresfaders" ><span id="valorFrecuencia2">440</span><br>Hz</p>
+		            </div>
+				<!--slider para elegir frecuancia en pos absoluta-->
+				</div>
 		            <input type="range" min="0" max="100" value="80" oninput="mostrarValor2()" id="rangobeat2"class="faders">
                      <div class="estado">
 					    <div id="indicador2"></div>
@@ -226,13 +235,22 @@
 		    <div class="contfaders">
 			    <p  class="valoresfaders">Beat 3</p>
 		        <div class="contfaderstado">
-				<div class="conttipoOnda"> 
-		            <button class="wavebutton" id="frecuenciaUser" value="440" onclick=""><img onclick="" class="imgwavefreq"src="Img/freq.png"></button>
+				<div class="conttipoOnda" id="conttipoOnda3"> 
+		            <button class="wavebutton" id="frecuenciaUser" value="440" onclick="abrirMenuMix('contFrecuencia3')"><img onclick="" class="imgwavefreq"src="Img/freq.png"></button>
 		            <button class="wavebutton" id="sine" value="sine" onclick="waveTypeuser('sineboun')"><img onclick="activebutton(event)" class="imgwave"src="Img/sine.png"></button>
 		            <button class="wavebutton" id="square" value="square" onclick="waveTypeuser('squareun')"><img onclick="activebutton(event)" class="imgwave"src="Img/square.png" id="clickdefaul1"></button>
 		            <button class="wavebutton" id="sawtooth" value="sawtooth" onclick="waveTypeuser('sawtoothun')"><img onclick="activebutton(event)" class="imgwave"src="Img/sawtooth.png"></button>
 		            <button class="wavebutton" id="triangle" value="triangle" onclick="waveTypeuser('triangleun')"><img onclick="activebutton(event)" class="imgwave"src="Img/triangle.png"></button>
-		     	</div>
+		     	<!--slider para elegir frecuancia en pos absoluta-->
+				    <div class="contFrecuencia" id="contFrecuencia3">
+		                <div class="botonTabs2">
+		                   <p class="cerrarCompas2" onclick="CerrarMenuMix('contFrecuencia3')">X</p>
+		                </div>
+			            <input type="range" value="784" oninput="mostrarValorFrecuencia3()" id="rangoFrecuencia3"class="faders2"min="100" max="1500">				
+                        <p class="valoresfaders" ><span id="valorFrecuencia3">784</span><br>Hz</p>	
+		            </div>
+				<!--slider para elegir frecuancia en pos absoluta-->
+				</div>
 		            <input type="range" min="0" max="100" value="50" oninput="mostrarValor3()" id="rangobeat3"class="faders">
                      <div class="estado">
 					    <div id="indicador3"></div>

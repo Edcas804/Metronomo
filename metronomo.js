@@ -1,459 +1,4 @@
-//abrir cerrar selector de compases
-var dark = false;
-var red = false
-function cambiarTemaRed(){
-	document.getElementById('Dark').style.display = 'none';
-	document.getElementById('Red').style.display = 'block';
-	var imgRed = document.getElementsByClassName('tabsImg2');
-	 for (i = 0; i < imgRed.length; i++) {
-            imgRed[i].style.display = "block";
-        }
-	var imgRed2 = document.getElementsByClassName('tabsImg');
-	 for (i = 0; i < imgRed2.length; i++) {
-            imgRed2[i].style.display = "none";
-        }
-	var brightness = document.getElementsByClassName('tabs');
-	 for (i = 0; i < brightness.length; i++) {
-            brightness[i].style.filter = "grayscale(0)";
-        }	
-	document.documentElement.style.setProperty('--main-backgroundbotones', '#300000');
-	document.documentElement.style.setProperty('--main-background-color', 'linear-gradient(to bottom, #250000, #350000)');
-	document.documentElement.style.setProperty('--main-backgroundprincipal', '#300000');
-	document.documentElement.style.setProperty('--main-borderbotones', '1px solid #300000');
-	document.documentElement.style.setProperty('--main-color', '909090');
-	document.documentElement.style.setProperty('--main-backgroundactive', '200000');
-	document.documentElement.style.setProperty('--main-coloractive', '#ff0000');
-	document.documentElement.style.setProperty('--main-backgroundslider', '#400000');
-	document.documentElement.style.setProperty('--main-backgroundfader', '#800000');
-	document.documentElement.style.setProperty('--main-backgroundAjustesCompas', 'rgba(30, 0, 0, 0.9)');
-	document.documentElement.style.setProperty('--main-backgroundhs', '#150000');
-	dark = false;
-    red = true;
-}
-function cambiarTemaDark(){
-	document.getElementById('Dark').style.display = 'block';
-	document.getElementById('Red').style.display = 'none';
-	
-	var imgRed = document.getElementsByClassName('tabsImg2');
-	 for (i = 0; i < imgRed.length; i++) {
-            imgRed[i].style.display = "none";
-        }
-	var imgRed2 = document.getElementsByClassName('tabsImg');
-	 for (i = 0; i < imgRed2.length; i++) {
-            imgRed2[i].style.display = "block";
-        }
-	var brightness = document.getElementsByClassName('tabs');
-	 for (i = 0; i < brightness.length; i++) {
-            brightness[i].style.filter = "grayscale(100%)";
-        }
-	document.documentElement.style.setProperty('--main-backgroundbotones', '#202020');
-	document.documentElement.style.setProperty('--main-background-color', 'linear-gradient(to bottom, #151515, #252525)');
-	document.documentElement.style.setProperty('--main-backgroundprincipal', '#202020');
-	document.documentElement.style.setProperty('--main-borderbotones', '1px solid #202020');
-	document.documentElement.style.setProperty('--main-color', '909090');
-	document.documentElement.style.setProperty('--main-backgroundactive', '151515');
-	document.documentElement.style.setProperty('--main-coloractive', '#ff0000');
-	document.documentElement.style.setProperty('--main-backgroundslider', '#303030');
-	document.documentElement.style.setProperty('--main-backgroundfader', '#606060');
-	document.documentElement.style.setProperty('--main-backgroundAjustesCompas', 'rgba(10, 10, 10, 0.9)');
-	document.documentElement.style.setProperty('--main-backgroundhs', '#151515');
-	dark = true;
-    red = false;
-	
-}
-function cerrarMenuCompas(ventana){
-	document.getElementById(ventana).style.width = '0%';
-	document.getElementById(ventana).style.visibility = 'hidden';
-	document.getElementById('ajustesLogo').style.transform = 'rotate(0deg)';
-}
-function abrirMenuCompas(ventana){
-	document.getElementById(ventana).style.width = '70%';
-	document.getElementById(ventana).style.visibility = 'visible';
-	document.getElementById('ajustesLogo').style.transform = 'rotate(360deg)';
-}
-function abrirMenuMix(ventana){
-	document.getElementById(ventana).style.visibility = 'visible';
-	document.getElementById(ventana).style.opacity = '1';
-	document.getElementById('ajustesLogo').style.transform = 'rotate(360deg)';
-}
-function CerrarMenuMix(ventana){
-	//document.getElementById(ventana).style.width = '70%';
-	document.getElementById(ventana).style.visibility = 'hidden';
-	document.getElementById(ventana).style.opacity = '0';
-	document.getElementById('ajustesLogo').style.transform = 'rotate(0deg)';
-}
 
-// mostrar play stop
-function mostrarplay(){
-	document.getElementById('play').style.display = 'block';
-	document.getElementById('contentplay').style.display = 'block';
-	document.getElementById('contenstop').style.display = 'none';
-	document.getElementById('stop').style.display = 'none';	
-}
-function ocultarplay(){
-	document.getElementById('play').style.display = 'none';
-	document.getElementById('contentplay').style.display = 'none';
-	document.getElementById('contenstop').style.display = 'block';
-	document.getElementById('stop').style.display = 'block';
-}
-//*************************************************
-
-var tempoRango = document.getElementById('rangoTempo').value;
-var tempoIn = document.getElementById('valorTempo').value;
-var back5 = document.getElementById('back5').value;
-var go5 = document.getElementById('go5').value;
-var tempoBack;
-
-//datos para tempo personalizado
-var usuarioTempo;
-function tempoUsuario(){
-    usuarioTempo = document.getElementById('usuarioTempo').value;
-	document.getElementById('back5').innerHTML = '-' + usuarioTempo;
-    document.getElementById('go5').innerHTML =  '+' + usuarioTempo;
-	back5 = '-' + usuarioTempo;
-	go5 = usuarioTempo;
-}
-//Fin datos para tempo personalizado
-function mostrarRango(){
-	tempoIn = document.getElementById('valorTempo').value;
-	document.getElementById('rangoTempo').value = tempoIn;
-}
-
-function mostrarTempoRango(){
-    tempoRango = document.getElementById('rangoTempo').value;
-    document.getElementById('valorTempo').value = tempoRango ;
-	
-}
-function back(){
-	    if(tempoRango < 21){
-		tempoRango = 220;
-	    }
-		tempoBack = parseInt(tempoRango) + parseInt(back5);
-		tempoRango = tempoBack;
-		document.getElementById('valorTempo').value = tempoBack ;
-		document.getElementById('rangoTempo').value = tempoBack;
-}
-function go(){
-	    if(tempoRango > 220){
-		tempoRango = 20;
-	    }
-		tempoGo = parseInt(tempoRango) + parseInt(go5);
-		document.getElementById('valorTempo').value = tempoGo;
-		document.getElementById('rangoTempo').value = tempoGo;
-		tempoRango = tempoGo;
-}
- var beatuseraumentar = document.getElementById('aumentar').value;
- var beatuserDisminuir = document.getElementById('disminuir').value;
- var aumbeat;
- var disbeat;
- usuarioTempo = 5; // se inicia nuevamente en 5 porque antes de esto esta NaN
-function disminuirbeat(){
-	    if(usuarioTempo < 2){
-			usuarioTempo = 11;
-		}
-	    disbeat = parseInt(usuarioTempo) - parseInt(beatuserDisminuir);
-	    usuarioTempo = disbeat;
-		document.getElementById('usuarioTempo').value = disbeat;
-		
-}
-function aumentarbeat(){
-	 if(usuarioTempo > 9){
-			usuarioTempo = 0;
-		}
-	   aumbeat = parseInt(usuarioTempo) + parseInt(beatuseraumentar);
-	   usuarioTempo = aumbeat;
-	   document.getElementById('usuarioTempo').value = aumbeat;
-	  
-
-}
-
-//************Funciones para determinar el compas y los circulos interactivos
-var binarios;
-var ternarios;	
-function validarBinarioTernario(){
-	     binarios = document.getElementsByClassName('binario');
-         ternarios = document.getElementsByClassName("ternario");
-	var i;
-	if(compasseisporOcho == true || compasNueveOcho == true || compasDoceporOcho == true || compasTresporOcho == true){
-		
-       for (i = 0; i < binarios.length; i++) {
-            binarios[i].style.display = "none";
-        }
-    
-		for(i = 0; i < ternarios.length; i++){
-			ternarios[i].style.display = 'block';
-		}
-		document.getElementById('ternarioNegra').style.display = 'block';
-		
-	}
-	
-	else{
-		for(i = 0; i < binarios.length; i++){
-			binarios[i].style.display = 'block';
-		}
-		for(i = 0; i < ternarios.length; i++){
-			ternarios[i].style.display = 'none';
-		}
-		document.getElementById('ternarioNegra').style.display = 'none';
-	}
-}	
-var compas = 4; // es global para que cambie según la funcion 
-var compasNegras = false;
-var	compasTresporOcho = false;
-var compasseisporOcho = false
-var	compasNueveOcho = false;
-var compasDoceporOcho = false
-var compasUnCuatro = false; // en caso de elegir el compas 1/4 con este boleano se evaluara la funcion jsnotas()
-
-function compasUnCua(){
-	compas = 1;
-	document.getElementById('innerCompas').innerHTML = '1 / 4';
-	//circulos interactivos
-	document.getElementById('circle1').style.display = 'Block';
-	document.getElementById('circle2').style.display = 'none';
-	document.getElementById('circle3').style.display = 'none';
-	document.getElementById('circle4').style.display = 'none';
-	document.getElementById('circle5').style.display = 'none';
-	document.getElementById('circle6').style.display = 'none';
-	document.getElementById('circle7').style.display = 'none';
-	
-	//	cerrar el menu
-	cerrarMenuCompas('listaCompases');
-	compasNegras = true;
-	compasTresporOcho = false
-	compasseisporOcho = false;
-	compasNueveOcho = false;
-    compasDoceporOcho = false;
-	compasUnCuatro = true;
-
-	validarBinarioTernario();
-		StopMetronomo();
-	 document.getElementById('playporDefecto').click(); 	
-	
-}
-function compasDosCua(){
-	compas = 2;
-	document.getElementById('innerCompas').innerHTML = '2 / 4';
-	//circulos interactivos
-	document.getElementById('circle1').style.display = 'Block';
-	document.getElementById('circle2').style.display = 'Block';
-	document.getElementById('circle3').style.display = 'none';
-	document.getElementById('circle4').style.display = 'none';
-	document.getElementById('circle5').style.display = 'none';
-	document.getElementById('circle6').style.display = 'none';
-	document.getElementById('circle7').style.display = 'none';
-	
-	//	cerrar el menu
-	cerrarMenuCompas('listaCompases');
-	compasNegras = true;
-	compasTresporOcho = false
-	compasseisporOcho = false;
-	compasNueveOcho = false;
-    compasDoceporOcho = false;
-	compasUnCuatro = false;
-	validarBinarioTernario();
-		StopMetronomo();
-	 document.getElementById('playporDefecto').click(); 	
-	
-}
-function compasTresCua(){
-	compas = 3;
-	document.getElementById('innerCompas').innerHTML = '3 / 4';
-	//circulos interactivos
-	document.getElementById('circle1').style.display = 'Block';
-	document.getElementById('circle2').style.display = 'Block';
-	document.getElementById('circle3').style.display = 'Block';
-	document.getElementById('circle4').style.display = 'none';
-	document.getElementById('circle5').style.display = 'none';
-	document.getElementById('circle6').style.display = 'none';
-	document.getElementById('circle7').style.display = 'none';
-	//	cerrar el menu
-	cerrarMenuCompas('listaCompases');
-	compasNegras = true;
-	compasTresporOcho = false;
-	compasseisporOcho = false;
-	compasNueveOcho = false;
-    compasDoceporOcho = false;
-	compasUnCuatro = false;
-	validarBinarioTernario();
-		StopMetronomo();
-	 document.getElementById('playporDefecto').click(); 	
-}
-function compasCuatroCua(){
-	compas = 4;
-	document.getElementById('innerCompas').innerHTML = '4 / 4';
-	//circulos interactivos
-	document.getElementById('circle1').style.display = 'Block';
-	document.getElementById('circle2').style.display = 'Block';
-	document.getElementById('circle3').style.display = 'Block';
-	document.getElementById('circle4').style.display = 'Block';
-	document.getElementById('circle5').style.display = 'none';
-	document.getElementById('circle6').style.display = 'none';
-	document.getElementById('circle7').style.display = 'none';
-	//	cerrar el menu
-	cerrarMenuCompas('listaCompases');
-	compasNegras = true;
-	compasTresporOcho = false;
-	compasseisporOcho = false;
-	compasNueveOcho = false;
-    compasDoceporOcho = false;
-	compasUnCuatro = false;
-	validarBinarioTernario();
-	 document.getElementById('playporDefecto').click(); 	
-}
-function compasCincoCua(){
-	compas = 5;
-	document.getElementById('innerCompas').innerHTML = '5 / 4';
-	//circulos interactivos
-	document.getElementById('circle1').style.display = 'Block';
-	document.getElementById('circle2').style.display = 'Block';
-	document.getElementById('circle3').style.display = 'Block';
-	document.getElementById('circle4').style.display = 'Block';
-	document.getElementById('circle5').style.display = 'Block';
-	document.getElementById('circle6').style.display = 'none';
-	document.getElementById('circle7').style.display = 'none';
-	//	cerrar el menu
-	cerrarMenuCompas('listaCompases');
-	compasNegras = true;
-	compasTresporOcho = false;
-	compasseisporOcho = false;
-	compasNueveOcho = false;
-    compasDoceporOcho = false;
-	compasUnCuatro = false;
-	validarBinarioTernario();
-		StopMetronomo();
-	 document.getElementById('playporDefecto').click(); 	
-}
-function compasSeisCua(){
-	compas = 6;
-	document.getElementById('innerCompas').innerHTML = '6 / 4';
-	//circulos interactivos
-	document.getElementById('circle1').style.display = 'Block';
-	document.getElementById('circle2').style.display = 'Block';
-	document.getElementById('circle3').style.display = 'Block';
-	document.getElementById('circle4').style.display = 'Block';
-	document.getElementById('circle5').style.display = 'Block';
-	document.getElementById('circle6').style.display = 'Block';
-	document.getElementById('circle7').style.display = 'none';
-	//	cerrar el menu
-	cerrarMenuCompas('listaCompases');
-	compasNegras = true;
-	compasseisporOcho = false;
-	compasTresporOcho = false;
-	compasNueveOcho = false;
-    compasDoceporOcho = false;
-	compasUnCuatro = false;
-	validarBinarioTernario();
-		StopMetronomo();
-	 document.getElementById('playporDefecto').click(); 	
-}
-function compasSieteCua(){
-	compas = 7;
-	document.getElementById('innerCompas').innerHTML = '7 / 4';
-	//circulos interactivos
-	document.getElementById('circle1').style.display = 'Block';
-	document.getElementById('circle2').style.display = 'Block';
-	document.getElementById('circle3').style.display = 'Block';
-	document.getElementById('circle4').style.display = 'Block';
-	document.getElementById('circle5').style.display = 'Block';
-	document.getElementById('circle6').style.display = 'Block';
-	document.getElementById('circle7').style.display = 'Block';
-	//	cerrar el menu
-	cerrarMenuCompas('listaCompases');
-	compasNegras = true;
-	compasTresporOcho = false;
-	compasseisporOcho = false;
-	compasNueveOcho = false;
-    compasDoceporOcho = false;
-	compasUnCuatro = false;
-	validarBinarioTernario();
-		StopMetronomo();
-	 document.getElementById('playporDefecto').click(); 	
-}
-function compasTresOcho(){
-	compas = 1;
-	document.getElementById('innerCompas').innerHTML = '3 / 8';
-	//circulos interactivos
-	document.getElementById('circle1').style.display = 'Block';
-	document.getElementById('circle2').style.display = 'none';
-	document.getElementById('circle3').style.display = 'none';
-	document.getElementById('circle4').style.display = 'none';
-	document.getElementById('circle5').style.display = 'none';
-	document.getElementById('circle6').style.display = 'none';
-	document.getElementById('circle7').style.display = 'none';
-	//	cerrar el menu
-	cerrarMenuCompas('listaCompases');
-	compasNegras = false;
-	compasTresporOcho = true;
-	compasseisporOcho = false;
-	compasNueveOcho = false;
-    compasDoceporOcho = false;
-	compasUnCuatro = false;
-	validarBinarioTernario();
-}
-function compasSeisOcho(){
-	compas = 2;
-	document.getElementById('innerCompas').innerHTML = '6 / 8';
-	//circulos interactivos
-	document.getElementById('circle1').style.display = 'Block';
-	document.getElementById('circle2').style.display = 'Block';
-	document.getElementById('circle3').style.display = 'none';
-	document.getElementById('circle4').style.display = 'none';
-	document.getElementById('circle5').style.display = 'none';
-	document.getElementById('circle6').style.display = 'none';
-	document.getElementById('circle7').style.display = 'none';
-	//	cerrar el menu
-	cerrarMenuCompas('listaCompases');
-	compasNegras = false;
-	compasTresporOcho = false;
-	compasseisporOcho = true;
-	compasNueveOcho = false;
-    compasDoceporOcho = false;
-	compasUnCuatro = false;
-	validarBinarioTernario();
-}
-function compasNueveporOcho(){
-	compas = 3;
-	document.getElementById('innerCompas').innerHTML = '9 / 8';
-	//circulos interactivos
-	document.getElementById('circle1').style.display = 'Block';
-	document.getElementById('circle2').style.display = 'Block';
-	document.getElementById('circle3').style.display = 'Block';
-	document.getElementById('circle4').style.display = 'none';
-	document.getElementById('circle5').style.display = 'none';
-	document.getElementById('circle6').style.display = 'none';
-	document.getElementById('circle7').style.display = 'none';
-	//	cerrar el menu
-	cerrarMenuCompas('listaCompases');
-	compasNegras = false;
-	compasTresporOcho = false;
-	compasseisporOcho = false;
-	compasNueveOcho = true;
-    compasDoceporOcho = false;
-	compasUnCuatro = false;
-	validarBinarioTernario();
-}
-function compasDoceOcho(){
-	compas = 4;
-	document.getElementById('innerCompas').innerHTML = '12 / 8';
-	//circulos interactivos
-	document.getElementById('circle1').style.display = 'Block';
-	document.getElementById('circle2').style.display = 'Block';
-	document.getElementById('circle3').style.display = 'Block';
-	document.getElementById('circle4').style.display = 'Block';
-	document.getElementById('circle5').style.display = 'none';
-	document.getElementById('circle6').style.display = 'none';
-	document.getElementById('circle7').style.display = 'none';
-	//	cerrar el menu
-	cerrarMenuCompas('listaCompases');
-	compasNegras = false;
-	compasTresporOcho = false;
-	compasseisporOcho = false;
-	compasNueveOcho = false;
-    compasDoceporOcho = true;
-	compasUnCuatro = false;
-	validarBinarioTernario();
-}
 
 
 
@@ -511,7 +56,14 @@ var freq3;
 function mostrarValorFrecuencia1(){
 	freq1 = document.getElementById('rangoFrecuencia1').value;
 	    document.getElementById('valorFrecuencia').innerHTML = freq1;
-	
+}
+function mostrarValorFrecuencia2(){
+	freq2 = document.getElementById('rangoFrecuencia2').value;
+	    document.getElementById('valorFrecuencia2').innerHTML = freq2;
+}
+function mostrarValorFrecuencia3(){
+	freq3 = document.getElementById('rangoFrecuencia3').value;
+	    document.getElementById('valorFrecuencia3').innerHTML = freq3;
 }
 function AcentoPrimerOff(){
 	document.getElementById('desactivar').style.display = 'none';
@@ -638,20 +190,6 @@ function jsnotas(){
 	gain1 = document.getElementById('rangobeat1').value/100;
 	
 	var indicador1 = document.getElementById('indicador1');
-	    indicador1.style.height = gain1Origin1+'%';
-	
-	var num = gain1Origin1;
-	var Interval1 = setInterval(nivel1, 3);
-	    function nivel1(){
-			if(num <= 1){
-				clearInterval(Interval1);
-			}
-			else{
-				num--;
-	            indicador1.style.height = num+'%';
-				
-			}
-		}
 	
 	freq1 = document.getElementById('rangoFrecuencia1').value;
 	frecuencia1 = freq1;
@@ -672,6 +210,34 @@ function jsnotas(){
 	g.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.09);
 	g.gain.value= gain1;
 	}
+	
+	//para subdividir los colores del indicador1
+	    if(gain1Origin1 < 45){
+			indicador1.style.background = '#00ff00';
+			indicador1.style.height = gain1Origin1+'%';
+		}
+		else if(gain1Origin1 < 90){
+			indicador1.style.background = 'linear-gradient(to top, #00ff00, #ffff00)';
+			indicador1.style.height = gain1Origin1+'%';
+			
+		}
+		else{
+	    indicador1.style.background = 'linear-gradient(to top, #00ff00, #00ff00, #ffff00, #ffff00, #ff0000)';
+	    indicador1.style.height = gain1Origin1+'%';
+	    }
+	var num = gain1Origin1;
+	var Interval1 = setInterval(nivel1, 3);
+	    function nivel1(){
+			if(num <= 1){
+				clearInterval(Interval1);
+			}
+			else{
+				num--;
+	            indicador1.style.height = num+'%';
+				
+			}
+		}
+	
 }
 function jsnotas2(){
 	var waveType;
@@ -691,13 +257,37 @@ function jsnotas2(){
 	waveType = "square";
 	}
 	//*************************
-	
-	
 	gain1Origin2 = document.getElementById('rangobeat2').value;
 	gain2 = document.getElementById('rangobeat2').value/100;
-	
 	var indicador2 = document.getElementById('indicador2');
+	
+	
+	freq2 = document.getElementById('rangoFrecuencia2').value;
+	frecuencia2 = freq2;
+	//oscilador
+	var o = context.createOscillator();
+	g2 = context.createGain();
+	o.connect(g2);
+	o.type = waveType; //sine, square, sawtooth, triangle
+	o.frequency.value= frecuencia2;
+	g2.connect(context.destination);
+	o.start(0);
+	g2.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.04);
+	g2.gain.value = gain2;
+	//para subdividir los colores del indicador1
+	    if(gain1Origin2 < 45){
+			indicador2.style.background = '#00ff00';
+			indicador2.style.height = gain1Origin2+'%';
+		}
+		else if(gain1Origin2 < 90){
+			indicador2.style.background = 'linear-gradient(to top, #00ff00, #ffff00)';
+			indicador2.style.height = gain1Origin2+'%';
+			
+		}
+		else{
+	    indicador2.style.background = 'linear-gradient(to top, #00ff00, #00ff00, #ffff00, #ffff00, #ff0000)';
 	    indicador2.style.height = gain1Origin2+'%';
+	    }
 	
 	var num = gain1Origin2;
 	var Interval2 = setInterval(nivel2, 2);
@@ -712,16 +302,6 @@ function jsnotas2(){
 			}
 		}
 	
-	//oscilador
-	var o = context.createOscillator();
-	g2 = context.createGain();
-	o.connect(g2);
-	o.type = waveType; //sine, square, sawtooth, triangle
-	o.frequency.value= beat2;
-	g2.connect(context.destination);
-	o.start(0);
-	g2.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.04);
-	g2.gain.value = gain2;
 }
 function jsnotas3(){
 	var waveType;
@@ -745,7 +325,34 @@ function jsnotas3(){
 	gain3 = document.getElementById('rangobeat3').value/100;
 	
 	var indicador3 = document.getElementById('indicador3');
+	//para subdividir los colores del indicador1
+	 
+	
+	freq3 = document.getElementById('rangoFrecuencia3').value;
+	frecuencia3 = freq3;
+	//oscilador
+	var o = context.createOscillator();
+	g3 = context.createGain();
+	o.connect(g3);
+	o.type = waveType; //sine, square, sawtooth, triangle
+	o.frequency.value= frecuencia3;
+	g3.connect(context.destination);
+	o.start(0);
+	g3.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.02);
+	g3.gain.value= gain3;
+	   if(gain1Origin3 < 45){
+			indicador3.style.background = '#00ff00';
+			indicador3.style.height = gain1Origin3+'%';
+		}
+		else if(gain1Origin3 < 90){
+			indicador3.style.background = 'linear-gradient(to top, #00ff00, #ffff00)';
+			indicador3.style.height = gain1Origin3+'%';
+			
+		}
+		else{
+	    indicador3.style.background = 'linear-gradient(to top, #00ff00, #00ff00, #ffff00, #ffff00, #ff0000)';
 	    indicador3.style.height = gain1Origin3+'%';
+	    }
 	
 	var num = gain1Origin3;
 	var Interval3 = setInterval(nivel3, 1);
@@ -761,16 +368,6 @@ function jsnotas3(){
 			}
 		}
 	
-	//oscilador
-	var o = context.createOscillator();
-	g3 = context.createGain();
-	o.connect(g3);
-	o.type = waveType; //sine, square, sawtooth, triangle
-	o.frequency.value= beat3;
-	g3.connect(context.destination);
-	o.start(0);
-	g3.gain.exponentialRampToValueAtTime(0.00001,context.currentTime +0.02);
-	g3.gain.value= gain3;
 }
 //FUNCTION PARA DETERMINAR LOS OSCILADORES DE LOS CLICKS	
 //FUNCTION PARA DETERMINAR LOS OSCILADORES DE LOS CLICKS	
@@ -837,8 +434,6 @@ function playNegras(){
 			circles[0].style.background = '#b50000';
 			circles[0].style.transform = 'scale(2)';
 	        }
-						
-			//document.getElementById('circle1').style.background = '#ff0000';
 		}
 		//*******************************
 		else if(negra == 1 && red == false){
@@ -1557,6 +1152,463 @@ function playAll(){
 	    
 	
 }
+//abrir cerrar selector de compases
+
+// mostrar play stop
+function mostrarplay(){
+	document.getElementById('play').style.display = 'block';
+	document.getElementById('contentplay').style.display = 'block';
+	document.getElementById('contenstop').style.display = 'none';
+	document.getElementById('stop').style.display = 'none';	
+}
+function ocultarplay(){
+	document.getElementById('play').style.display = 'none';
+	document.getElementById('contentplay').style.display = 'none';
+	document.getElementById('contenstop').style.display = 'block';
+	document.getElementById('stop').style.display = 'block';
+}
+//*************************************************
+
+var tempoRango = document.getElementById('rangoTempo').value;
+var tempoIn = document.getElementById('valorTempo').value;
+var back5 = document.getElementById('back5').value;
+var go5 = document.getElementById('go5').value;
+var tempoBack;
+
+//datos para tempo personalizado
+var usuarioTempo;
+function tempoUsuario(){
+    usuarioTempo = document.getElementById('usuarioTempo').value;
+	document.getElementById('back5').innerHTML = '-' + usuarioTempo;
+    document.getElementById('go5').innerHTML =  '+' + usuarioTempo;
+	back5 = '-' + usuarioTempo;
+	go5 = usuarioTempo;
+}
+//Fin datos para tempo personalizado
+function mostrarRango(){
+	tempoIn = document.getElementById('valorTempo').value;
+	document.getElementById('rangoTempo').value = tempoIn;
+}
+
+function mostrarTempoRango(){
+    tempoRango = document.getElementById('rangoTempo').value;
+    document.getElementById('valorTempo').value = tempoRango ;
+	
+}
+function back(){
+	    if(tempoRango < 21){
+		tempoRango = 220;
+	    }
+		tempoBack = parseInt(tempoRango) + parseInt(back5);
+		tempoRango = tempoBack;
+		document.getElementById('valorTempo').value = tempoBack ;
+		document.getElementById('rangoTempo').value = tempoBack;
+}
+function go(){
+	    if(tempoRango > 220){
+		tempoRango = 20;
+	    }
+		tempoGo = parseInt(tempoRango) + parseInt(go5);
+		document.getElementById('valorTempo').value = tempoGo;
+		document.getElementById('rangoTempo').value = tempoGo;
+		tempoRango = tempoGo;
+}
+ var beatuseraumentar = document.getElementById('aumentar').value;
+ var beatuserDisminuir = document.getElementById('disminuir').value;
+ var aumbeat;
+ var disbeat;
+ usuarioTempo = 5; // se inicia nuevamente en 5 porque antes de esto esta NaN
+function disminuirbeat(){
+	    if(usuarioTempo < 2){
+			usuarioTempo = 11;
+		}
+	    disbeat = parseInt(usuarioTempo) - parseInt(beatuserDisminuir);
+	    usuarioTempo = disbeat;
+		document.getElementById('usuarioTempo').value = disbeat;
+		
+}
+function aumentarbeat(){
+	 if(usuarioTempo > 9){
+			usuarioTempo = 0;
+		}
+	   aumbeat = parseInt(usuarioTempo) + parseInt(beatuseraumentar);
+	   usuarioTempo = aumbeat;
+	   document.getElementById('usuarioTempo').value = aumbeat;
+	  
+
+}
+
+//************Funciones para determinar el compas y los circulos interactivos
+var binarios;
+var ternarios;	
+function validarBinarioTernario(){
+	     binarios = document.getElementsByClassName('binario');
+         ternarios = document.getElementsByClassName("ternario");
+	var i;
+	if(compasseisporOcho == true || compasNueveOcho == true || compasDoceporOcho == true || compasTresporOcho == true){
+		
+       for (i = 0; i < binarios.length; i++) {
+            binarios[i].style.display = "none";
+        }
+    
+		for(i = 0; i < ternarios.length; i++){
+			ternarios[i].style.display = 'block';
+		}
+		document.getElementById('ternarioNegra').style.display = 'block';
+		
+	}
+	
+	else{
+		for(i = 0; i < binarios.length; i++){
+			binarios[i].style.display = 'block';
+		}
+		for(i = 0; i < ternarios.length; i++){
+			ternarios[i].style.display = 'none';
+		}
+		document.getElementById('ternarioNegra').style.display = 'none';
+	}
+}	
+var compas = 4; // es global para que cambie según la funcion 
+var compasNegras = false;
+var	compasTresporOcho = false;
+var compasseisporOcho = false
+var	compasNueveOcho = false;
+var compasDoceporOcho = false
+var compasUnCuatro = false; // en caso de elegir el compas 1/4 con este boleano se evaluara la funcion jsnotas()
+
+function compasUnCua(){
+	compas = 1;
+	document.getElementById('innerCompas').innerHTML = '1 / 4';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'none';
+	document.getElementById('circle3').style.display = 'none';
+	document.getElementById('circle4').style.display = 'none';
+	document.getElementById('circle5').style.display = 'none';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = true;
+	compasTresporOcho = false
+	compasseisporOcho = false;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	compasUnCuatro = true;
+
+	validarBinarioTernario();
+		StopMetronomo();
+	 document.getElementById('playporDefecto').click(); 	
+	
+}
+function compasDosCua(){
+	compas = 2;
+	document.getElementById('innerCompas').innerHTML = '2 / 4';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'Block';
+	document.getElementById('circle3').style.display = 'none';
+	document.getElementById('circle4').style.display = 'none';
+	document.getElementById('circle5').style.display = 'none';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = true;
+	compasTresporOcho = false
+	compasseisporOcho = false;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	compasUnCuatro = false;
+	validarBinarioTernario();
+		StopMetronomo();
+	 document.getElementById('playporDefecto').click(); 	
+	
+}
+function compasTresCua(){
+	compas = 3;
+	document.getElementById('innerCompas').innerHTML = '3 / 4';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'Block';
+	document.getElementById('circle3').style.display = 'Block';
+	document.getElementById('circle4').style.display = 'none';
+	document.getElementById('circle5').style.display = 'none';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = true;
+	compasTresporOcho = false;
+	compasseisporOcho = false;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	compasUnCuatro = false;
+	validarBinarioTernario();
+		StopMetronomo();
+	 document.getElementById('playporDefecto').click(); 	
+}
+function compasCuatroCua(){
+	compas = 4;
+	document.getElementById('innerCompas').innerHTML = '4 / 4';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'Block';
+	document.getElementById('circle3').style.display = 'Block';
+	document.getElementById('circle4').style.display = 'Block';
+	document.getElementById('circle5').style.display = 'none';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = true;
+	compasTresporOcho = false;
+	compasseisporOcho = false;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	compasUnCuatro = false;
+	validarBinarioTernario();
+	 document.getElementById('playporDefecto').click(); 	
+}
+function compasCincoCua(){
+	compas = 5;
+	document.getElementById('innerCompas').innerHTML = '5 / 4';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'Block';
+	document.getElementById('circle3').style.display = 'Block';
+	document.getElementById('circle4').style.display = 'Block';
+	document.getElementById('circle5').style.display = 'Block';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = true;
+	compasTresporOcho = false;
+	compasseisporOcho = false;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	compasUnCuatro = false;
+	validarBinarioTernario();
+		StopMetronomo();
+	 document.getElementById('playporDefecto').click(); 	
+}
+function compasSeisCua(){
+	compas = 6;
+	document.getElementById('innerCompas').innerHTML = '6 / 4';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'Block';
+	document.getElementById('circle3').style.display = 'Block';
+	document.getElementById('circle4').style.display = 'Block';
+	document.getElementById('circle5').style.display = 'Block';
+	document.getElementById('circle6').style.display = 'Block';
+	document.getElementById('circle7').style.display = 'none';
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = true;
+	compasseisporOcho = false;
+	compasTresporOcho = false;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	compasUnCuatro = false;
+	validarBinarioTernario();
+		StopMetronomo();
+	 document.getElementById('playporDefecto').click(); 	
+}
+function compasSieteCua(){
+	compas = 7;
+	document.getElementById('innerCompas').innerHTML = '7 / 4';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'Block';
+	document.getElementById('circle3').style.display = 'Block';
+	document.getElementById('circle4').style.display = 'Block';
+	document.getElementById('circle5').style.display = 'Block';
+	document.getElementById('circle6').style.display = 'Block';
+	document.getElementById('circle7').style.display = 'Block';
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = true;
+	compasTresporOcho = false;
+	compasseisporOcho = false;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	compasUnCuatro = false;
+	validarBinarioTernario();
+		StopMetronomo();
+	 document.getElementById('playporDefecto').click(); 	
+}
+function compasTresOcho(){
+	compas = 1;
+	document.getElementById('innerCompas').innerHTML = '3 / 8';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'none';
+	document.getElementById('circle3').style.display = 'none';
+	document.getElementById('circle4').style.display = 'none';
+	document.getElementById('circle5').style.display = 'none';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = false;
+	compasTresporOcho = true;
+	compasseisporOcho = false;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	compasUnCuatro = false;
+	validarBinarioTernario();
+}
+function compasSeisOcho(){
+	compas = 2;
+	document.getElementById('innerCompas').innerHTML = '6 / 8';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'Block';
+	document.getElementById('circle3').style.display = 'none';
+	document.getElementById('circle4').style.display = 'none';
+	document.getElementById('circle5').style.display = 'none';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = false;
+	compasTresporOcho = false;
+	compasseisporOcho = true;
+	compasNueveOcho = false;
+    compasDoceporOcho = false;
+	compasUnCuatro = false;
+	validarBinarioTernario();
+}
+function compasNueveporOcho(){
+	compas = 3;
+	document.getElementById('innerCompas').innerHTML = '9 / 8';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'Block';
+	document.getElementById('circle3').style.display = 'Block';
+	document.getElementById('circle4').style.display = 'none';
+	document.getElementById('circle5').style.display = 'none';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = false;
+	compasTresporOcho = false;
+	compasseisporOcho = false;
+	compasNueveOcho = true;
+    compasDoceporOcho = false;
+	compasUnCuatro = false;
+	validarBinarioTernario();
+}
+function compasDoceOcho(){
+	compas = 4;
+	document.getElementById('innerCompas').innerHTML = '12 / 8';
+	//circulos interactivos
+	document.getElementById('circle1').style.display = 'Block';
+	document.getElementById('circle2').style.display = 'Block';
+	document.getElementById('circle3').style.display = 'Block';
+	document.getElementById('circle4').style.display = 'Block';
+	document.getElementById('circle5').style.display = 'none';
+	document.getElementById('circle6').style.display = 'none';
+	document.getElementById('circle7').style.display = 'none';
+	//	cerrar el menu
+	cerrarMenuCompas('listaCompases');
+	compasNegras = false;
+	compasTresporOcho = false;
+	compasseisporOcho = false;
+	compasNueveOcho = false;
+    compasDoceporOcho = true;
+	compasUnCuatro = false;
+	validarBinarioTernario();
+}
+var dark = false;
+var red = false
+function cambiarTemaRed(){
+	document.getElementById('Dark').style.display = 'none';
+	document.getElementById('Red').style.display = 'block';
+	var imgRed = document.getElementsByClassName('tabsImg2');
+	 for (i = 0; i < imgRed.length; i++) {
+            imgRed[i].style.display = "block";
+        }
+	var imgRed2 = document.getElementsByClassName('tabsImg');
+	 for (i = 0; i < imgRed2.length; i++) {
+            imgRed2[i].style.display = "none";
+        }
+	var brightness = document.getElementsByClassName('tabs');
+	 for (i = 0; i < brightness.length; i++) {
+            brightness[i].style.filter = "grayscale(0)";
+        }	
+	document.documentElement.style.setProperty('--main-backgroundbotones', '#300000');
+	document.documentElement.style.setProperty('--main-background-color', 'linear-gradient(to bottom, #250000, #350000)');
+	document.documentElement.style.setProperty('--main-backgroundprincipal', '#300000');
+	document.documentElement.style.setProperty('--main-borderbotones', '1px solid #300000');
+	document.documentElement.style.setProperty('--main-color', '909090');
+	document.documentElement.style.setProperty('--main-backgroundactive', '200000');
+	document.documentElement.style.setProperty('--main-coloractive', '#ff0000');
+	document.documentElement.style.setProperty('--main-backgroundslider', '#400000');
+	document.documentElement.style.setProperty('--main-backgroundfader', '#800000');
+	document.documentElement.style.setProperty('--main-backgroundAjustesCompas', 'rgba(30, 0, 0, 0.9)');
+	document.documentElement.style.setProperty('--main-backgroundhs', '#150000');
+	dark = false;
+    red = true;
+}
+function cambiarTemaDark(){
+	document.getElementById('Dark').style.display = 'block';
+	document.getElementById('Red').style.display = 'none';
+	
+	var imgRed = document.getElementsByClassName('tabsImg2');
+	 for (i = 0; i < imgRed.length; i++) {
+            imgRed[i].style.display = "none";
+        }
+	var imgRed2 = document.getElementsByClassName('tabsImg');
+	 for (i = 0; i < imgRed2.length; i++) {
+            imgRed2[i].style.display = "block";
+        }
+	var brightness = document.getElementsByClassName('tabs');
+	 for (i = 0; i < brightness.length; i++) {
+            brightness[i].style.filter = "grayscale(100%)";
+        }
+	document.documentElement.style.setProperty('--main-backgroundbotones', '#202020');
+	document.documentElement.style.setProperty('--main-background-color', 'linear-gradient(to bottom, #151515, #252525)');
+	document.documentElement.style.setProperty('--main-backgroundprincipal', '#202020');
+	document.documentElement.style.setProperty('--main-borderbotones', '1px solid #202020');
+	document.documentElement.style.setProperty('--main-color', '909090');
+	document.documentElement.style.setProperty('--main-backgroundactive', '151515');
+	document.documentElement.style.setProperty('--main-coloractive', '#ff0000');
+	document.documentElement.style.setProperty('--main-backgroundslider', '#303030');
+	document.documentElement.style.setProperty('--main-backgroundfader', '#606060');
+	document.documentElement.style.setProperty('--main-backgroundAjustesCompas', 'rgba(10, 10, 10, 0.9)');
+	document.documentElement.style.setProperty('--main-backgroundhs', '#151515');
+	dark = true;
+    red = false;
+	
+}
+function cerrarMenuCompas(ventana){
+	document.getElementById(ventana).style.width = '0%';
+	document.getElementById(ventana).style.visibility = 'hidden';
+	document.getElementById('ajustesLogo').style.transform = 'rotate(0deg)';
+}
+function abrirMenuCompas(ventana){
+	document.getElementById(ventana).style.width = '70%';
+	document.getElementById(ventana).style.visibility = 'visible';
+	document.getElementById('ajustesLogo').style.transform = 'rotate(360deg)';
+}
+function abrirMenuMix(ventana){
+	document.getElementById(ventana).style.visibility = 'visible';
+	document.getElementById(ventana).style.opacity = '1';
+	document.getElementById('ajustesLogo').style.transform = 'rotate(360deg)';
+}
+function CerrarMenuMix(ventana){
+	//document.getElementById(ventana).style.width = '70%';
+	document.getElementById(ventana).style.visibility = 'hidden';
+	document.getElementById(ventana).style.opacity = '0';
+	document.getElementById('ajustesLogo').style.transform = 'rotate(0deg)';
+}
+
 //botones tipo de onda active
 function activebutton(evt){
 	var i;
@@ -1589,3 +1641,4 @@ function activebutton3(evt){
 		document.getElementById('clickdefaul1').click();
 		document.getElementById('clickdefaul2').click();
 		document.getElementById('clickdefaul3').click();
+		

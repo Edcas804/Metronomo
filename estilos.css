@@ -207,16 +207,22 @@ body {
 .contenedorElegirCompas::-webkit-scrollbar-track {
 }
 /***+++++++++++++++++++++++++++++*/
-.cerrarCompas, .cerrarCompas2 {
+.cerrarCompas, .cerrarCompas2, .cerrarCompas3 {
 	background: var(--main-backgroundprincipal);
 	color: var(--main-color);
 	position: relative;
-	padding: 5px;
-	border-radius: 8px;
+	padding: 2px;
+	border-radius: 5px;
 	cursor: pointer;
 	border: var(--main-borderbotones);
 }
-.cerrarCompas:hover, .cerrarCompas2:hover{
+.cerrarCompas2 {
+	font-size: 12px;	
+}
+.cerrarCompas3 {
+	font-size: 20px;
+}
+.cerrarCompas:hover, .cerrarCompas2:hover, .cerrarCompas3:hover{
 	transform: scale(0.95);
 }
 .contenedorTempo {
@@ -240,16 +246,21 @@ body {
 	width: 50%;
 	padding: 0px 0px 15px 0px;
 }
-.botonTabs, .botonTabs2, .contenedorRango, .contenedorSelectRango{
+.botonTabs, .botonTabs2, .botonTabs3, .contenedorRango, .contenedorSelectRango{
 	background: var(--main-background-color);
 	border-radius: 15px;
 	margin: 2px;
 	padding: 4px;
  }
+ .botonTabs3 {
+    position: absolute;
+	top: -20;
+	border-radius: 15px;
+	margin: 2px;
+ }
 .botonTabs2 {
 	position: absolute;
-	top: -20;
-	right: -20;
+	top: -25;
 }
 .contenedorRango {
 	margin-bottom: 15px; 
@@ -500,6 +511,7 @@ body {
 }
 .valoresfaders {
 	color: #404040;
+	text-align: center;
 }
 /*selecionar tipo de onda*/
 .conttipoOnda {
@@ -507,20 +519,19 @@ body {
 	justify-content: center;
 	flex-direction: column;
 }
-#conttipoOnda1 {
-	position: ralative;
+#conttipoOnda1, #conttipoOnda2, #conttipoOnda3 {
+	position: relative;
 }
-.contFrecuencia {
+.contFrecuencia, .contFrecuencia2, .contFrecuencia3 {
 	position: absolute;
-	left: -10px;
+	left: -35px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items:center;
 	background: var(--main-backgroundprincipal);
 	box-shadow: var(--main-box-shadow);
-	z-index: 5;
-	height: 180px;
+	height: 200px;
 	width: 35px;
 	box-shadow: var(--main-box-shadow);
 	border-radius: 12px;
