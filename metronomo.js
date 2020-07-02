@@ -1,8 +1,3 @@
-
-
-
-
-
 //************Funciones para determinar el compas y los circulos interactivos
 //set time globales
 var MetronomoNegra;
