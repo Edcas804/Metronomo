@@ -35,9 +35,9 @@ var ternariobo = false;
 	var beatNegra = new Audio("Audio/negra.wav");
 	var beatNegraAcento = new Audio("Audio/negraA.wav");
 	//audiosCortos	
-	const beat4 = new Audio("Audio/semicorchea2.wav");
-	const beat4a = new Audio("Audio/semicorchea2.wav");
-	const beat4b = new Audio("Audio/semicorchea2.wav");
+	var beat4 = new Audio("Audio/semicorchea2.wav");
+	var beat4a = new Audio("Audio/semicorchea2.wav");
+	var beat4b = new Audio("Audio/semicorchea2.wav");
 //FUNCTION PARA DETERMINAR LOS OSCILADORES DE LOS CLICKS	
 //FUNCTION PARA DETERMINAR LOS OSCILADORES DE LOS CLICKS	
 	var context = new AudioContext();
